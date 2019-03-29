@@ -1,0 +1,10 @@
+ {
+     "status": true,
+     "description": "",
+        "data": {
+            "roles": ["admin"],
+            "token": "admin",
+            "introduction": "我是超级管理员",
+            "ame": "Super Admin"
+        }
+  }
