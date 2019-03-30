@@ -1,5 +1,4 @@
 <script>
-import '@/icons' // icon
 export default {
   name: 'MenuItem',
   functional: true,

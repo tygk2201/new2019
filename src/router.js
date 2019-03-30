@@ -31,7 +31,7 @@ export default new Router({
       component: Layout,
       redirect: '/intelligent/first',
       name: 'intelligent',
-      meta: { title: '一级菜单', icon: 'link' },
+      meta: { title: '一级菜单', icon: 'tree' },
       children: [{
         path: 'first',
         name:'first',

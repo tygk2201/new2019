@@ -1,4 +1,10 @@
 
+
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
     baseUrl: process.env.NODE_ENV === 'production'? '/online': '/',
     // baseUrl:'./',
@@ -51,6 +57,21 @@ module.exports = {
         .exclude
         .add('/Users/maybexia/Downloads/FE/community_built-in/src/lib')
         .end()
+
+      config.resolve.alias.set("@", resolve("src"));
+      config.module.rules.delete("svg");
+      config.module
+        .rule('svg-smart')
+        .test(/\.svg$/)
+        .include
+          .add(resolve('src/icons'))
+          .end()
+
+        .use('svg-sprite-loader')
+          .loader('svg-sprite-loader')
+          .options( {
+            symbolId: 'icon-[name]'
+          })
     },
   
     // 配置高于chainWebpack中关于 css loader 的配置
@@ -111,6 +132,20 @@ module.exports = {
     pwa: {},
   
     // 第三方插件配置
-    pluginOptions: {}
+    pluginOptions: {},
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /\.svg$/,
+    //       use:[{
+    //         loader: 'svg-sprite-loader',
+    //         include: [path.resolve('src/icons')],
+    //         options: {
+    //           symbolId: 'icon-[name]'
+    //         }
+    //       }]
+    //     },
+    //   ]
+    // }
   };
   
