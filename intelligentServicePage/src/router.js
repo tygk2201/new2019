@@ -15,6 +15,11 @@ export default new Router({
       component: ()=>import('@/views/login')
     },
     {
+      path: '/information/advertise',
+      hidden: true,
+      component: ()=>import('@/views/information/advertise')
+    },
+    {
       path: '/',
       component: Layout,
       redirect: '/home',
@@ -42,6 +47,22 @@ export default new Router({
         name:'second',
         component: () => import('@/views/intelligent/second/index'),
         meta: { title: '菜单二', icon: 'table' }
+      }]
+    },
+    {
+      path: '/information',
+      component: Layout,
+      redirect: '/information/notice',
+      name: 'information',
+      meta: { title: '广告营销', icon: 'tree' },
+      children: [{
+        path: 'notice',
+        name:'notice',
+        component: () => import('@/views/information/notice'),
+        meta: { title: '消息中心', icon: 'table' }
+      },{
+        path: '/information/advertise',
+        meta: { title: '广告推广', icon: 'table' }
       }]
     },
     {
