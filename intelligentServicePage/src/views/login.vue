@@ -1,16 +1,18 @@
 <template>
+<div class="background_class">
   <div class="login-container">
-       <el-form ref="ruleForm2" :model="ruleForm2" :rules="rules2" class="login-form" auto-complete="on" label-position="left">
+       <el-form ref="ruleForm2" :model="ruleForm2" :rules="rules2" class="login_form" auto-complete="on" label-position="left" label-width="50px">
              <el-form-item label="账号" prop="account" >
-                <el-input type="primary" v-model="ruleForm2.acc" placeholder="username" ></el-input>
+                <el-input type="primary" v-model="ruleForm2.acc" placeholder="username"></el-input>
             </el-form-item>
            <el-form-item label="密码" prop="password">
-               <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+               <el-input type="password" v-model="ruleForm2.pass" autocomplete="off" ></el-input>
             </el-form-item>
-             <el-form-item>
-                 <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
+             <el-form-item label-width="0">
+                 <el-button type="primary" @click="submitForm('ruleForm2')" class="width_btn">登录</el-button>
             </el-form-item>
        </el-form>
+  </div>
   </div>
 </template>
 
@@ -81,6 +83,30 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style>
+.login-container{
+  background-color: #FFF;
+  border-radius: 4px;
+  border:1px solid #DCDFE6;
+  padding: 15px;
+  padding-top: 50px;
+  /* width: 20%; */
+  position: absolute;
+  margin-left: 70%;
+  margin-top:10%
+}
+.background_class{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(48, 65, 86)
+}
+.login_form{
+  width: 300px;
+  height: 200px;
+}
+.width_btn{
+  width: 80%;
+  margin-left: 10%
+}
 
 </style>
