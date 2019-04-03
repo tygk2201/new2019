@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.bce3315c66817d9297d1fcce723cc0c2.js"
+  "precache-manifest.239fa4c9fa3bbdfa2438cf613b400f05.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "intelligent-service"});

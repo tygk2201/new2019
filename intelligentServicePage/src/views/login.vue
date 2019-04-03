@@ -72,6 +72,7 @@ export default {
                 self.$router.replace({ path: 'home' })
               }).catch(() => {
             this.loading = false
+            console.log('error submit!!');
           })
           } else {
             console.log('error submit!!');

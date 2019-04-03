@@ -5,7 +5,7 @@ const user = {
   state: {
     token: getToken(),
     name: '',
-    avatar: '',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     roles: []
   },
 
@@ -63,14 +63,18 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
+        // logout(state.token).then(() => {
+        //   commit('SET_TOKEN', '')
+        //   commit('SET_ROLES', [])
+        //   removeToken()
+        //   resolve()
+        // }).catch(error => {
+        //   reject(error)
+        // })
+        commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           removeToken()
           resolve()
-        }).catch(error => {
-          reject(error)
-        })
       })
     },
 

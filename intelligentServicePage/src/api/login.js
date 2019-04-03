@@ -8,7 +8,7 @@ export function fetchList(query) {
     })
 }
 
-export function login(username,password) {
+export function login(userName,password) {
     // return request({
     //   url: '/api/user/login',
     //   method: 'post',
@@ -17,7 +17,7 @@ export function login(username,password) {
     return request({
       url: '/api/userManage/login',
       method: 'post',
-      data: {username,password}
+      data: {userName,password}
     })
 }
 
