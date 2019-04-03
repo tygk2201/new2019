@@ -113,18 +113,18 @@ module.exports = {
       hotOnly: false,
      //网络请求mock
       proxy: {
+          // '/api':{
+          //     target:'http://localhost:8888',
+          //     changeOrigin: true,
+          //     pathRewrite: {
+          //         '^/api': '/mock'
+          //       }
+          // },
           '/api':{
-              target:'http://localhost:8888',
-              changeOrigin: true,
-              pathRewrite: {
-                  '^/api': '/mock'
-                }
-          },
-          '/test':{
             target:'http://47.105.33.160:8888',
             changeOrigin: true,
             pathRewrite: {
-                '^/test': '/acs'
+                '^/api': '/acs'
               }
         }
       },

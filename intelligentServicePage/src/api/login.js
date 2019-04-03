@@ -15,7 +15,7 @@ export function login(username,password) {
     //   data: {username,password}
     // })
     return request({
-      url: '/user/login',
+      url: '/api/userManage/login',
       method: 'post',
       data: {username,password}
     })

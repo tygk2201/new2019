@@ -30,9 +30,10 @@ const user = {
       const username = userInfo.acc.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.pass).then(response => {
-          const data = response.data
-          setToken(data.token)
-          commit('SET_TOKEN', data.token)
+          // const data = response.data
+          const token='admin-token';
+          setToken(token)
+          commit('SET_TOKEN',token)
           resolve()
         }).catch(error => {
           reject(error)
