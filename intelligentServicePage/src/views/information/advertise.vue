@@ -8,25 +8,60 @@
       </el-carousel>
 
       <div class="tab_box">
-          <div class="grid-content" v-for="item in adList" :key="item.id">
-            <span >{{item.title}}</span>
-            <span >{{item.text}}</span>
-          </div>
+        <div class="grid-content" v-for="item in adList" :key="item.id">
+          <span>{{item.title}}</span>
+          <span>{{item.text}}</span>
+        </div>
       </div>
     </div>
-    <div class='main_bottom_box'>
-        <el-popover
+    <div class="main_bottom_box">
+      <el-popover
         ref="popover1"
         placement="top-start"
         title="联系电话"
         width="200"
         trigger="hover"
-        content="13621886041">
-        </el-popover>
-        <el-button v-popover:popover1 round type="primary">电话咨询</el-button>
-        <el-button round @click="dialogFormVisible = true" type="primary">申请代理</el-button>
-
+        content="13621886041"
+      ></el-popover>
+      <el-button v-popover:popover1 round type="primary">电话咨询</el-button>
+      <el-button round @click="dialogFormVisible = true" type="primary">申请代理</el-button>
     </div>
+    <!-- <div class="box_chart">
+      <div class="chart_item">
+        <div class="chart_item_title">
+          <span class="col_Header_tit">图一</span>
+        </div>
+        <div id="car" class="ehart_init"></div>
+      </div>
+      <div class="chart_item">
+        <div class="col_Header bottom_line">
+          <span class="col_Header_tit">图二</span>
+        </div>
+
+        <div class="user_portrait_content">
+          <div id="circle">
+            <div class="avatar"/>
+            <div class="path_placeholder"/>
+            <div id="aroundTop" class="move">
+              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
+              <div>电子邮箱</div>
+            </div>
+            <div id="aroundRight" class="move">
+              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
+              <div>电话号码</div>
+            </div>
+            <div id="aroundBottom" class="move">
+              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
+              <div>支付宝</div>
+            </div>
+            <div id="aroundLeft" class="move">
+              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
+              <div>京东</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <div class="dm-module">
       <div class="module-title">xxx机器人可以做什么</div>
       <div class="module-items">
@@ -62,7 +97,13 @@
         </div>
       </div>
 
-      <a href="#ex2" rel="modal:open" class="module-btn free-experience" id="experience-btn1"  @click="dialogFormVisible = true">
+      <a
+        href="#ex2"
+        rel="modal:open"
+        class="module-btn free-experience"
+        id="experience-btn1"
+        @click="dialogFormVisible = true"
+      >
         申请代理
         <i class="iconfont icon-arrow-line-right" id="icon-right1"></i>
       </a>
@@ -87,7 +128,7 @@
           <!-- <el-select v-model="form.region" placeholder="请选择活动区域">
             <el-option label="区域一" value="shanghai"></el-option>
             <el-option label="区域二" value="beijing"></el-option>
-          </el-select> -->
+          </el-select>-->
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -114,17 +155,31 @@ export default {
         desc: ""
       },
       formLabelWidth: "80px",
-      adList:[{'title':'行业解决方案','text':'支持个性化定制更贴近真实场景','id':1},
-{'title':'真人体验','text':'真人语音、多轮会话、支持打断支持转接人工','id':2},
-{'title':'核心技术','text':'掌握AI语音处理知识图谱等核心技术','id':3},
-{'title':'研发团队','text':'两位阿里云MVP中美两地研发中心','id':4},
-{'title':'值得信赖','text':'阿里云金牌合作伙伴苏州市高新技术企业','id':5}]
+      adList: [
+        { title: "行业解决方案", text: "支持个性化定制更贴近真实场景", id: 1 },
+        {
+          title: "真人体验",
+          text: "真人语音、多轮会话、支持打断支持转接人工",
+          id: 2
+        },
+        { title: "核心技术", text: "掌握AI语音处理知识图谱等核心技术", id: 3 },
+        { title: "研发团队", text: "两位阿里云MVP中美两地研发中心", id: 4 },
+        {
+          title: "值得信赖",
+          text: "阿里云金牌合作伙伴苏州市高新技术企业",
+          id: 5
+        }
+      ]
     };
   },
   methods: {
     onSubmit() {
       console.log(this.form.phone);
       this.dialogFormVisible = false;
+      // this.around('aroundTop', 90)
+      // this.around('aroundRight', 0)
+      // this.around('aroundBottom', 270)
+      // this.around('aroundLeft', 180)
     }
   }
 };
@@ -184,13 +239,13 @@ export default {
   background-color: #99a9bf;
 }
 .grid-content span:nth-child(1) {
-    font-family: PingFangSC-Regular;
-    font-size: 18px;
-    margin: 5px 0;
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  margin: 5px 0;
 }
 .grid-content span:nth-child(2) {
-    font-family: PingFangSC-Light;
-    font-size: 14px;
+  font-family: PingFangSC-Light;
+  font-size: 14px;
 }
 /* cankaowangye */
 .dm-module {
@@ -268,12 +323,12 @@ body {
   width: 73px;
   height: 73px;
 }
-.main_bottom_box{
+.main_bottom_box {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding-top:40px;
-  padding-bottom: 40px; 
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 </style>

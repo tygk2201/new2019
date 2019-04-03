@@ -6,8 +6,8 @@ function resolve(dir) {
 }
 
 module.exports = {
-    baseUrl: process.env.NODE_ENV === 'production'? '/online': '/',
-    // baseUrl:'./',
+    // baseUrl: process.env.NODE_ENV === 'production'? '/acs': '/',
+    publicPath:'./',
   
     // 输出文件目录
     outputDir: 'dist',
@@ -106,7 +106,7 @@ module.exports = {
   
       host: '127.0.0.1',
   
-      port: 2201,
+      port: 8888,
   
       https: false,
   
@@ -114,12 +114,19 @@ module.exports = {
      //网络请求mock
       proxy: {
           '/api':{
-              target:'http://localhost:2201',
+              target:'http://localhost:8888',
               changeOrigin: true,
               pathRewrite: {
                   '^/api': '/mock'
                 }
-          }
+          },
+          '/test':{
+            target:'http://47.105.33.160:8888',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/test': '/acs'
+              }
+        }
       },
   
       before: app => {

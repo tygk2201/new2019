@@ -9,8 +9,13 @@ export function fetchList(query) {
 }
 
 export function login(username,password) {
+    // return request({
+    //   url: '/api/user/login',
+    //   method: 'post',
+    //   data: {username,password}
+    // })
     return request({
-      url: '/api/user/login',
+      url: '/user/login',
       method: 'post',
       data: {username,password}
     })
