@@ -6,7 +6,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-    // baseUrl: process.env.NODE_ENV === 'production'? '/acs': '/',
+    // baseUrl: process.env.NODE_ENV === 'production'? 'http://47.105.33.160:8888': '/',
     publicPath:'./',
   
     // 输出文件目录
@@ -104,7 +104,7 @@ module.exports = {
     devServer: {
       open: true,
   
-      host: '127.0.0.1',
+      host: '0.0.0.0',
   
       port: 8888,
   
@@ -120,12 +120,12 @@ module.exports = {
           //         '^/api': '/mock'
           //       }
           // },
-          '/api':{
+          '/acs':{
             target:'http://47.105.33.160:8888',
             changeOrigin: true,
-            pathRewrite: {
-                '^/api': '/acs'
-              }
+            // pathRewrite: {
+            //     '^/acs': ''
+            //   }
         }
       },
   

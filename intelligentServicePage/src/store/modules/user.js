@@ -1,5 +1,6 @@
 import { login,logout,getInfo} from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import service from "@/utils/service"
 
 const user = {
   state: {
@@ -29,15 +30,24 @@ const user = {
     Login({ commit }, userInfo) {
       const username = userInfo.acc.trim()
       return new Promise((resolve, reject) => {
-        login(username, userInfo.pass).then(response => {
-          // const data = response.data
-          const token='admin-token';
-          setToken(token)
-          commit('SET_TOKEN',token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+        // login(username, userInfo.pass).then(response => {
+        //   // const data = response.data
+        //   const token='admin-token';
+        //   setToken(token)
+        //   commit('SET_TOKEN',token)
+        //   resolve()
+        // }).catch(error => {
+        //   reject(error)
+        // })
+        service.login({'userName':username,'password':userInfo.pass}).then(res=>{
+          if(!!res){
+            const data = res.data
+            setToken('admin-token')
+            commit('SET_TOKEN', 'admin-token')
+            resolve()
+          }
+         
+    })
       })
     },
 

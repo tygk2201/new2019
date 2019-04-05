@@ -26,16 +26,17 @@
       <el-button v-popover:popover1 round type="primary">电话咨询</el-button>
       <el-button round @click="dialogFormVisible = true" type="primary">申请代理</el-button>
     </div>
-    <!-- <div class="box_chart">
+    <div class="title_bottom">公司优势</div>
+    <div class="box_chart">
       <div class="chart_item">
         <div class="chart_item_title">
-          <span class="col_Header_tit">图一</span>
+          <span class="col_Header_tit">优势统计</span>
         </div>
-        <div id="car" class="ehart_init"></div>
+        <div id="car" class="chart_box_item"></div>
       </div>
       <div class="chart_item">
-        <div class="col_Header bottom_line">
-          <span class="col_Header_tit">图二</span>
+        <div class="chart_item_title">
+          <span class="col_Header_tit">合作伙伴</span>
         </div>
 
         <div class="user_portrait_content">
@@ -43,27 +44,49 @@
             <div class="avatar"/>
             <div class="path_placeholder"/>
             <div id="aroundTop" class="move">
-              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
-              <div>电子邮箱</div>
+              <img src="/img/png/al.png" alt width="50" height="50">
+              <div>阿里巴巴</div>
             </div>
             <div id="aroundRight" class="move">
-              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
-              <div>电话号码</div>
+              <img src="/img/png/xunfei.jpg" alt width="50" height="50" >
+              <div>科达讯飞</div>
             </div>
             <div id="aroundBottom" class="move">
-              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
-              <div>支付宝</div>
+              <img src="/img/png/baidu.png" alt width="50" height="50">
+              <div>百度云</div>
             </div>
             <div id="aroundLeft" class="move">
-              <img src="/img/icons/favicon-32x32.png" alt width="50" height="50">
-              <div>京东</div>
+              <img src="/img/png/dui.jpg" alt width="50" height="50">
+              <div>思必驰</div>
             </div>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
+    <div class="IndexTher">
+			<div class="TextCenter">
+				<div class="title">
+					<div class="text">使用言通电话机器人，服务效率会得到怎样的提升</div>
+					<div class="xian"></div>
+				</div>
+				<div class="ListMain" >
+					<div class="list" v-for="item in dataShowList" :key="item.id">
+						<dl>
+							<div class="number">
+								<span class="animateNum" data-animatetype="num" data-animatetarget="15">{{item.number}}</span>
+                <img :src="item.src">
+                <i>{{item.icon}}</i>
+							</div>
+							<dt>{{item.adText}}</dt>
+							<dd class="info">{{item.text}}<em>{{item.number}}{{item.icon}}</em>以上</dd>
+						</dl>
+					</div>
+				
+				</div>
+			</div>
+		</div>
     <div class="dm-module">
-      <div class="module-title">xxx机器人可以做什么</div>
+      <div class="module-title">xxx电话机器人能帮你做什么</div>
       <div class="module-items">
         <div class="cando-item">
           <img class="img_icon" src="/img/png/phone.png" alt>
@@ -169,22 +192,125 @@ export default {
           text: "阿里云金牌合作伙伴苏州市高新技术企业",
           id: 5
         }
-      ]
+      ],
+      dataShowList:[{
+        id:1,
+        number:15,
+        icon:"备",
+        text:"提升",
+        src:'/img/png/up.png',
+        adText:"时间利用率"
+      },{
+        id:2,
+        number:80,
+        icon:"%",
+        text:"节约",
+        src:'/img/png/down.png',
+        adText:"人力成本"
+      },{
+        id:3,
+        number:350,
+        icon:"%",
+        text:"提升",
+        src:'/img/png/up.png',
+        adText:"销售业绩"
+      },{
+        id:4,
+        src:'/img/png/down.png',
+        number:55,
+         icon:"%",
+        text:"下降",
+        adText:"管理成本"
+      },{
+        id:5,
+        src:'/img/png/up.png',
+        number:45,
+         icon:"%",
+        text:"提升",
+        adText:"客户满意度"
+      }]
     };
+  },
+  mounted() {
+    this.around("aroundTop", 90);
+    this.around("aroundRight", 0);
+    this.around("aroundBottom", 270);
+    this.around("aroundLeft", 180);
+    this.draw();
   },
   methods: {
     onSubmit() {
-      console.log(this.form.phone);
       this.dialogFormVisible = false;
-      // this.around('aroundTop', 90)
-      // this.around('aroundRight', 0)
-      // this.around('aroundBottom', 270)
-      // this.around('aroundLeft', 180)
+    },
+    around(id, angle) {
+      var oCircle = document.getElementById("circle");
+      var aroundTop = document.getElementById(id);
+
+      var r = oCircle.offsetWidth / 2;
+      this.timer = setInterval(function() {
+        angle++;
+        var hd = (Math.PI / 180) * angle;
+
+        var x = r * Math.cos(hd);
+        var y = r * Math.sin(hd);
+
+        aroundTop.style.left = r + x + "px";
+        aroundTop.style.top = r - y + "px";
+      }, 30);
+    },
+    draw() {
+      let chartId = document.getElementById("car");
+      let chartDom = this.$echarts.init(chartId);
+      let option = {
+        title: {
+          // text: "机器人财务优势统计",
+          subtext: "节省成本",
+          x: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          x: "center",
+          y: "bottom",
+          data: [
+            "客服",
+            "财务",
+            "销售",
+            "售后",
+            "电话",
+            "投资"
+          ]
+        },
+        calculable: true,
+        series: [
+          {
+            name: "节省",
+            type: "pie",
+            radius: [30, 110],
+            center: ["50%", "50%"],
+            roseType: "area",
+            data: [
+              { value: 35, name: "客服" },
+              { value: 5, name: "财务" },
+              { value: 15, name: "销售" },
+              { value: 25, name: "售后" },
+              { value: 40, name: "电话" },
+              { value: 35, name: "投资" },
+              // { value: 30, name: "rose7" },
+              // { value: 40, name: "rose8" }
+            ]
+          }
+        ]
+      };
+
+      chartDom.setOption(option);
     }
   }
 };
 </script>
-<style>
+<style scoped lang="less">
 .ad {
   width: 100%;
   height: auto;
@@ -330,5 +456,161 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+/* //转圈圈 */
+.box_chart {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f7f7f7;
+  margin-bottom: 30px;
+  padding-top: 15px;
+}
+.chart_box_item {
+  // width: 400px;
+  width: 100%;
+  height: 400px;
+}
+.chart_item {
+  width: 48%;
+  // height: 400px;
+  // display: flex;
+  //   flex-flow: column;
+  //   justify-content: center;
+  //   align-items: center;
+}
+.chart_item_title {
+  text-align: center;
+  // height: 35px;
+  font-size: 24px;
+    color: #666666;
+}
+.ehart_init {
+  width: 100%;
+  height: 100%;
+}
+.user_portrait_content {
+  width: 100%;
+  margin-top: 25px;
+  height: calc(55vh - 35px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px dashed gray;
+  box-sizing: border-box;
+  .move {
+    position: absolute;
+    width: 160px;
+    height: 60px;
+    margin-left: -80px;
+    margin-top: -30px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    color: #fff;
+    background: linear-gradient(to right, #fff, #ddd);
+  }
+  .path_placeholder {
+    width: 140px;
+    height: 140px;
+    border: 1px solid red;
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 80px;
+    left: 80px;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    background: url("/img/icons/logo.jpg") no-repeat center center;
+    background-size: 100% 100%;
+  }
+}
+.title_bottom {
+  width: 100%;
+  font-size: 32px;
+  text-align: center;
+}
+
+.IndexTher{
+  width: 100%;
+  padding: 70px 0px;
+  height: 450px;
+}
+.IndexTwo .title, .IndexTher .title, .IndexFour .title {
+    text-align: center;
+    font-size: 24px;
+    color: #666666;
+    margin-bottom: 60px;
+    // margin-top: 20px;
+}
+.IndexTwo .title .xian, .IndexTher .title .xian, .IndexFour .title .xian {
+    width: 115px;
+    height: 3px;
+    background: #3da7f5;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.IndexTher .ListMain .list {
+    text-align: center;
+    float: left;
+    width: 240px;
+    height: auto;
+    overflow: hidden;
+}
+.IndexTher .ListMain .list .number {
+    color: #333;
+    margin-bottom: 40px;
+}
+.IndexTher .ListMain .list .number span {
+    display: inline-block;
+    font-size: 72px;
+}
+.IndexTher .ListMain .list dt {
+    text-align: center;
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.IndexTher .ListMain .list dd.info {
+    font-size: 14px;
+    color: #666;
+    margin-left: 0px
+}
+.IndexTher .ListMain .list dd.info em {
+    font-size: 24px;
+    color: #f44343;
+}
+em, i {
+    font-style: normal;
+        box-sizing: inherit;
+}
+.ListMain{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.number img{
+  width: 20px;
+  height: 20px;
+}
+.move img{
+  border-radius: 50%
 }
 </style>
