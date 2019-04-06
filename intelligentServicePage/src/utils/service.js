@@ -1,5 +1,5 @@
 // const api=require('./api.js');
-const HOST='/acs';
+const HOST='http://47.105.33.160:8888/acs';
 import to from "./to";
 import api from './api.js'
 import { Message, Loading } from 'element-ui'
