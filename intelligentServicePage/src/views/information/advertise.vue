@@ -2,8 +2,12 @@
   <div>
     <div class="ad">
       <el-carousel :interval="5000" arrow="always" height="400px">
-        <el-carousel-item v-for="item in [1,2,3,4,5,6]" :key="item">
+        <el-carousel-item v-for="item in [1,2]" :key="item">
           <h3>广告语{{ item }}</h3>
+        </el-carousel-item>
+        <el-carousel-item>
+          <div class="big_title_text">全球领先的人工智能认知交互企业</div>
+          <p class="big_title_two">致力于智能产业前沿科技创新，持续为企业智能赋能价值</p>
         </el-carousel-item>
       </el-carousel>
 
@@ -88,35 +92,10 @@
     <div class="dm-module">
       <div class="module-title">xxx电话机器人能帮你做什么</div>
       <div class="module-items">
-        <div class="cando-item">
-          <img class="img_icon" src="/img/png/phone.png" alt>
-          <div class="cando-item-title">自动拨打</div>
-          <div class="cando-item-desc">客户资料一键批量导入，随心设定自动拨打参数</div>
-        </div>
-        <div class="cando-item">
-          <img class="img_icon" src="/img/png/chart.png" alt>
-          <div class="cando-item-title">智能沟通</div>
-          <div class="cando-item-desc">真人语音交互，专业业务解答；主动引导过程，客户提问对答如流</div>
-        </div>
-        <div class="cando-item">
-          <img class="img_icon" src="/img/png/record.png" alt>
-          <div class="cando-item-title">自动记录</div>
-          <div class="cando-item-desc">通话录音、识别文本自动存取，客户业务关注点自动标出</div>
-        </div>
-        <div class="cando-item">
-          <img class="img_icon" src="/img/png/data.png" alt>
-          <div class="cando-item-title">自动分类</div>
-          <div class="cando-item-desc">机器学习，神经网络算法自动识别客户意向并准确分级，可直接根据客户意愿强弱区分跟进优先级，以便快速达成交易</div>
-        </div>
-        <div class="cando-item">
-          <img class="img_icon" src="/img/png/swan.png" alt>
-          <div class="cando-item-title">自动分析</div>
-          <div class="cando-item-desc">准确识别客户性别、年龄、兴趣点、情绪，通话完毕自动生成分析报表</div>
-        </div>
-        <div class="col-md-4 cando-item">
-          <img class="img_icon" src="/img/png/people.png" alt>
-          <div class="cando-item-title">辅助</div>
-          <div class="cando-item-desc">推广精英跟进意向客户时，实时匹配客户问题的优质答案笔记，提升推广精英通话有效率和成交率</div>
+        <div class="cando-item" v-for="item in candoItem" :key="item.id">
+          <img class="img_icon" :src="item.candoImg" alt>
+          <div class="cando-item-title">{{item.candoIteTitle}}</div>
+          <div class="cando-item-desc">{{item.candoItemDes}}</div>
         </div>
       </div>
 
@@ -228,7 +207,13 @@ export default {
          icon:"%",
         text:"提升",
         adText:"客户满意度"
-      }]
+      }],
+      candoItem:[{id:0,candoIteTitle:'自动拨打',candoItemDes:'客户资料一键批量导入，随心设定自动拨打参数',candoImg:'/img/png/phone.png'},
+      {id:1,candoIteTitle:'智能沟通',candoItemDes:'真人语音交互，专业业务解答；主动引导过程，客户提问对答如流',candoImg:'/img/png/chart.png'},
+      {id:2,candoIteTitle:'自动记录',candoItemDes:'通话录音、识别文本自动存取，客户业务关注点自动标出',candoImg:'/img/png/record.png'},
+      {id:3,candoIteTitle:'自动分类',candoItemDes:'机器学习，神经网络算法自动识别客户意向并准确分级，可直接根据客户意愿强弱区分跟进优先级，以便快速达成交易',candoImg:'/img/png/data.png'},
+      {id:4,candoIteTitle:'自动分析',candoItemDes:'准确识别客户性别、年龄、兴趣点、情绪，通话完毕自动生成分析报表',candoImg:'/img/png/swan.png'},
+      {id:5,candoIteTitle:'辅助',candoItemDes:'推广精英跟进意向客户时，实时匹配客户问题的优质答案笔记，提升推广精英通话有效率和成交率',candoImg:'/img/png/people.png'}]
     };
   },
   mounted() {
@@ -613,4 +598,20 @@ em, i {
 .move img{
   border-radius: 50%
 }
+.big_title_text{
+  line-height: 60px;
+    font-size: 44px;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin: 0 0 0 80px;
+    z-index: 99;
+    position: relative;
+  }
+  .big_title_two{
+    margin: 60px 0 0 80px;
+    line-height: 22px;
+    font-size: 24px;
+    color: #222;
+    font-weight: 400;
+  }
 </style>
