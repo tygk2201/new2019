@@ -145,6 +145,18 @@
 import service from "@/utils/service"
 export default {
   data() {
+    let checkPhone = (rule, value, callback) => {
+        if (value != '') {
+          let phoneReg = /(^1[3|4|5|6|7|8|9]\d{9}$)|(^09\d{8}$)/
+          if (!phoneReg.test(value)) {  
+             callback(new Error('手机格式错误！')); 
+            }else{
+              callback();
+            }  
+        }else{
+          return callback(new Error('请输入电话'));
+        }
+      };
     return {
       dialogFormVisible: false, //false时关闭弹窗，true打开
       form: {
@@ -155,9 +167,9 @@ export default {
       },
       rules:{
         name:[{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        phone:[{ required: true, message: '请输入电话', trigger: 'blur' }],
-        email:[{ type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }
-    ]
+        phone:[{ required: true, message: '请输入电话', trigger: 'blur' },
+        { validator: checkPhone, trigger: 'blur' }],
+        email:[{ type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }]
       },
       formLabelWidth: "80px",
       adList: [

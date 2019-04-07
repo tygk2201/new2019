@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import service from "@/utils/service"
   const cityOptions = ['已接通', '关机', '空号', '停机', '正在通话中', '用户正忙', '来电提醒', '呼叫转移失败', '网络忙', '无人接听'];
   const resultOptions = ['A-意向客户', 'B-一般意向', 'C-简单对话', 'D-明确拒绝', 'E-未接通', 'F-多次未接', 'G-呼叫失败', 'H-黑名单', '未呼叫'];
   export default {
@@ -108,8 +109,37 @@
         results:resultOptions
       }
     },
+    mounted(){
+      this.getNoticeList()
+    },
 
     methods: {
+      getNoticeList(){
+        let params={
+          currentPage:1,
+          pageSize:10
+        };
+      service.getJoinList(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"获取列表成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+            }else{
+              Message({
+                message: data.description?data.description:"获取列表失败！",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+      })
+      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
