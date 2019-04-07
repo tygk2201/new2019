@@ -142,19 +142,16 @@
 </template>
 
 <script>
+import service from "@/utils/service"
 export default {
   data() {
     return {
       dialogFormVisible: false, //false时关闭弹窗，true打开
       form: {
         name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        email:"",
+        phone:"",
+        des: ""
       },
       formLabelWidth: "80px",
       adList: [
@@ -226,6 +223,28 @@ export default {
   methods: {
     onSubmit() {
       this.dialogFormVisible = false;
+      let params=this.form;
+      service.addContent(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"申请成功！",
+                type: 'success',
+                duration: 5 * 1000
+              })
+            }else{
+              Message({
+                message: data.description?data.description:"申请失败！",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+      })
+
     },
     around(id, angle) {
       var oCircle = document.getElementById("circle");

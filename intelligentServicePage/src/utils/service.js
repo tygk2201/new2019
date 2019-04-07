@@ -5,6 +5,7 @@ import api from './api.js'
 import { Message, Loading } from 'element-ui'
 
 const service= {
+  // 用户登录
     async login(params){
         const sendData = params;
         const url =HOST+'/userManage/login';
@@ -27,6 +28,21 @@ const service= {
         //     return res;
         //   }
           return res;
-    }
+    },
+    //加盟申请
+    async addContent(params){
+      const sendData = params;
+      const url =HOST+'/advertise/addContent';
+      const [err, res] =await to(api.post(url,sendData))
+        if (err) {
+          console.log('ERROR: Location: login, Reason:' + err.errMsg);
+          Message({
+              message: '网络异常，请稍后再试！',
+              type: 'error',
+              duration: 5 * 1000
+            })
+        }
+        return res;
+  }
 }
 export default service
