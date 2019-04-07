@@ -32,7 +32,7 @@ const service= {
     //加盟申请
     async addContent(params){
       const sendData = params;
-      const url =HOST+'/advertise/addContent';
+      const url =HOST+'/contact/addContact';
       const [err, res] =await to(api.post(url,sendData))
         if (err) {
           console.log('ERROR: Location: login, Reason:' + err.errMsg);
@@ -48,8 +48,8 @@ const service= {
   
   async getJoinList(params){
     const sendData = params;
-    const url =HOST+'/advertise/getJoinList';
-    const [err, res] =await to(api.get(url,sendData))
+    const url =HOST+'/contact/listContact';
+    const [err, res] =await to(api.post(url,sendData))
       if (err) {
         console.log('ERROR: Location: login, Reason:' + err.errMsg);
         Message({

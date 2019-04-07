@@ -48,6 +48,7 @@
 
 <script>
 import service from "@/utils/service"
+import { Message, Loading } from 'element-ui'
   const cityOptions = ['已接通', '关机', '空号', '停机', '正在通话中', '用户正忙', '来电提醒', '呼叫转移失败', '网络忙', '无人接听'];
   const resultOptions = ['A-意向客户', 'B-一般意向', 'C-简单对话', 'D-明确拒绝', 'E-未接通', 'F-多次未接', 'G-呼叫失败', 'H-黑名单', '未呼叫'];
   export default {

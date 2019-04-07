@@ -143,6 +143,7 @@
 
 <script>
 import service from "@/utils/service"
+import { Message, Loading } from 'element-ui'
 export default {
   data() {
     let checkPhone = (rule, value, callback) => {
