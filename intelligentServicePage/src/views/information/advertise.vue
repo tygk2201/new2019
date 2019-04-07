@@ -115,14 +115,14 @@
       <!-- <el-button type="primary" icon="el-icon-service" @click="dialogFormVisible = true"></el-button> -->
     </el-row>
     <el-dialog title="加盟申请" :visible.sync="dialogFormVisible" width="30%">
-      <el-form :model="form">
-        <el-form-item label="姓名" :label-width="formLabelWidth">
+      <el-form :model="form" :rules="rules">
+        <el-form-item label="姓名" :label-width="formLabelWidth" prop="name">
           <el-input v-model="form.name" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="联系电话" :label-width="formLabelWidth">
+        <el-form-item label="联系电话" :label-width="formLabelWidth" prop="phone">
           <el-input v-model="form.phone" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="电子邮箱" :label-width="formLabelWidth">
+        <el-form-item label="电子邮箱" :label-width="formLabelWidth" prop="email">
           <el-input v-model="form.email" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
@@ -152,6 +152,12 @@ export default {
         email:"",
         phone:"",
         des: ""
+      },
+      rules:{
+        name:[{ required: true, message: '请输入姓名', trigger: 'blur' }],
+        phone:[{ required: true, message: '请输入电话', trigger: 'blur' }],
+        email:[{ type: 'email', message: '请输入正确的邮箱', trigger: ['blur', 'change'] }
+    ]
       },
       formLabelWidth: "80px",
       adList: [
