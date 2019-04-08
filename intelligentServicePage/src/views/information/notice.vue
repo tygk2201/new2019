@@ -18,30 +18,43 @@
       width="120"
       prop="phone">
     </el-table-column>
-    <el-table-column
-      prop="address"
-      label="状态">
+     <el-table-column
+      prop="email"
+      label="邮箱"
+      width="160">
     </el-table-column>
     <el-table-column
-      prop="date"
+      prop="createDate"
       sortable
       label="时间">
     </el-table-column>
     <el-table-column
-      label="操作" sortable prop="status">
+      prop="remark"
+      label="备注"
+      width="120">
+    </el-table-column>
+    <!-- <el-table-column
+      prop="state===0?'未查看':'已查看'"
+      label="状态">
+    </el-table-column> -->
+    
+    <el-table-column
+      label="操作" sortable prop="state">
       <template slot-scope="scope" >
-        <el-button size="small" type="primary">{{scope.row.status==0?'待处理':'已处理'}}</el-button>
+        <!-- <el-button size="small" type="primary">{{scope.row.state==0?'处理确认':'已处理'}}</el-button> -->
+        <el-button type="primary" v-if="scope.row.state===0" @click="changeState(scope.row.id)">处理确认</el-button>
+        <el-button type="info" v-if="scope.row.state===1" disabled>已查看</el-button>
       </template>
     </el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 20, 30, 40]"
       :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="40">
+      :total="totalContat">
     </el-pagination>
   </div>
 </template>
@@ -54,51 +67,10 @@ import { Message, Loading } from 'element-ui'
   export default {
     data() {
       return {
-        tableData: [{
-          date: '2016-05-03',
-          phone:'13621886041',
-          name: '王小虎',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-02',
-          phone:'13621886041',
-          name: '王小虎',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          phone:'13621886041',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          phone:'13621886041',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          phone:'13621886041',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          phone:'13621886041',
-          address: '未处理',
-          status:0
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          phone:'13621886041',
-          address: '已处理',
-          status:1
-        }],
+        tableData:[],
+        totalContat:0,
         multipleSelection: [],
-        currentPage4: 4,
+        currentPage: 1,
 
         checkAll: false,
         checkAll2:false,
@@ -117,18 +89,18 @@ import { Message, Loading } from 'element-ui'
     methods: {
       getNoticeList(){
         let params={
-          currentPage:1,
+          currentPage:this.currentPage,
           pageSize:10
         };
       service.getJoinList(params).then(res=>{
         if(!!res){
             const data = res.data
             if(!!data.status){
-              Message({
-                message: data.description?data.description:"获取列表成功",
-                type: 'success',
-                duration: 5 * 1000
-              })
+              const list=data.data.acsContactInfos
+              const total=data.data.total
+              this.tableData=list
+              this.totalContat=total
+              console.log(this.tableData,this.totalContat)
             }else{
               Message({
                 message: data.description?data.description:"获取列表失败！",
@@ -140,6 +112,35 @@ import { Message, Loading } from 'element-ui'
             
           }
       })
+      },
+      changeState(Id){
+        let params={
+          id:Id,
+        }
+        service.updateContactState(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"修改状态成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.getNoticeList();
+              // const list=data.data.acsContactInfos
+              // this.tableData=list
+            }else{
+              Message({
+                message: data.description?data.description:"修改状态失败！",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+      })
+
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);

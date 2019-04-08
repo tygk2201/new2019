@@ -45,7 +45,6 @@ const service= {
         return res;
   },
   //获取消息列表
-  
   async getJoinList(params){
     const sendData = params;
     const url =HOST+'/contact/listContact';
@@ -59,6 +58,21 @@ const service= {
           })
       }
       return res;
+},
+//修改消息状态
+async updateContactState(params){
+  const sendData = params;
+  const url =HOST+'/contact/updateContactState';
+  const [err, res] =await to(api.post(url,sendData))
+    if (err) {
+      console.log('ERROR: Location: login, Reason:' + err.errMsg);
+      Message({
+          message: '网络异常，请稍后再试！',
+          type: 'error',
+          duration: 5 * 1000
+        })
+    }
+    return res;
 },
 }
 export default service
