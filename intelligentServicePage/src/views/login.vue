@@ -69,7 +69,7 @@ export default {
              this.loading = true
               this.$store.dispatch('Login',self.ruleForm2).then((res)=>{
                 this.loading = false
-                self.$router.replace({ path: 'home' })
+                self.$router.replace({ path: '/information/notice' })
               }).catch(() => {
             this.loading = false
             console.log('error submit!!');

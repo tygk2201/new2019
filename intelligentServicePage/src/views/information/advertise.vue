@@ -34,12 +34,6 @@
     <div class="box_chart">
       <div class="chart_item">
         <div class="chart_item_title">
-          <span class="col_Header_tit">优势统计</span>
-        </div>
-        <div id="car" class="chart_box_item"></div>
-      </div>
-      <div class="chart_item">
-        <div class="chart_item_title">
           <span class="col_Header_tit">合作伙伴</span>
         </div>
 
@@ -65,6 +59,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="chart_item">
+        <div class="chart_item_title">
+          <span class="col_Header_tit">优势统计</span>
+        </div>
+        <div id="car" class="chart_box_item"></div>
       </div>
     </div>
     <div class="IndexTher">

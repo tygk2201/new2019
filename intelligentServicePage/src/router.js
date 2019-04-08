@@ -50,7 +50,7 @@ export default new Router({
     //   }]
     // },
     {
-      path: '/',
+      path: '/information',
       component: Layout,
       redirect: '/information/notice',
       name: 'information',
