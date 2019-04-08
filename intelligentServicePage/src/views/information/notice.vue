@@ -1,8 +1,16 @@
 <template>
+
     <div class="table_box">
+      <div class="table_box bottom_box">
+  <el-row>
+  <el-button type="primary" size='small' @click="deletNotice">删除</el-button>
+  <el-button type="primary" size='small' @click="changeState">确认查看</el-button>
+</el-row>
+</div>
   <el-table
     :data="tableData"
     style="width: 100%"
+    @selection-change="handleSelectionChange"
     >
     <el-table-column
       type="selection"
@@ -61,9 +69,7 @@
 
 <script>
 import service from "@/utils/service"
-import { Message, Loading } from 'element-ui'
-  const cityOptions = ['已接通', '关机', '空号', '停机', '正在通话中', '用户正忙', '来电提醒', '呼叫转移失败', '网络忙', '无人接听'];
-  const resultOptions = ['A-意向客户', 'B-一般意向', 'C-简单对话', 'D-明确拒绝', 'E-未接通', 'F-多次未接', 'G-呼叫失败', 'H-黑名单', '未呼叫'];
+import { Message} from 'element-ui'
   export default {
     data() {
       return {
@@ -71,15 +77,6 @@ import { Message, Loading } from 'element-ui'
         totalContat:0,
         multipleSelection: [],
         currentPage: 1,
-
-        checkAll: false,
-        checkAll2:false,
-        checkedCities: [],
-        checkedResults:[],
-        isIndeterminate: false,
-        isIndeterminate2:false,
-        cities: cityOptions,
-        results:resultOptions
       }
     },
     mounted(){
@@ -113,9 +110,20 @@ import { Message, Loading } from 'element-ui'
           }
       })
       },
-      changeState(Id){
-        let params={
-          id:Id,
+      changeState(ID){
+        let selectList=this.multipleSelection;
+        let params=[];
+        if(!!ID){
+          params.push({
+            id:ID
+          })
+        }else if(selectList.length<1){
+          return;
+        }
+        for(let i=0;i<selectList.length;i++){
+          params.push({
+            id:selectList[i].id
+          })
         }
         service.updateContactState(params).then(res=>{
         if(!!res){
@@ -127,8 +135,6 @@ import { Message, Loading } from 'element-ui'
                 duration: 5 * 1000
               })
               this.getNoticeList();
-              // const list=data.data.acsContactInfos
-              // this.tableData=list
             }else{
               Message({
                 message: data.description?data.description:"修改状态失败！",
@@ -140,32 +146,52 @@ import { Message, Loading } from 'element-ui'
             
           }
       })
+      },
+      deletNotice(){
+        let selectList=this.multipleSelection;
+        let params=[];
+        if(selectList.length<1){
+          return;
+        }
+        for(let i=0;i<selectList.length;i++){
+          params.push({
+            id:selectList[i].id
+          })
+        }
+        service.deleteContact(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"删除成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.getNoticeList();
+            }else{
+              Message({
+                message: data.description?data.description:"删除失败！",
+                type: 'error',
+                duration: 5 * 1000
+              })
 
+            }
+            
+          }
+      })
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        this.getNoticeList()
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+        this.getNoticeList()
       },
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      },
-      handleCheckAllChange2(val) {
-        this.checkedResults = val ? resultOptions: [];
-        this.isIndeterminate2 = false;
-      },
-      handleCheckedCitiesChange2(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.results.length;
-        this.isIndeterminate2 = checkedCount > 0 && checkedCount < this.results.length;
-      },
+      handleSelectionChange(val){
+         this.multipleSelection = val;
+         console.log(this.multipleSelection)
+      }
 
     }
   }

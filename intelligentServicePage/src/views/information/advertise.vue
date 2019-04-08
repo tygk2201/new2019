@@ -2,12 +2,18 @@
   <div>
     <div class="ad">
       <el-carousel :interval="5000" arrow="always" height="400px">
-        <el-carousel-item v-for="item in [1,2]" :key="item">
-          <h3>广告语{{ item }}</h3>
+        <el-carousel-item>
+          <div class="big_title_text">xxx机器人作为智能专业销售客服</div>
+          <p class="big_title_two">开启电销与客服的革命时代</p>
         </el-carousel-item>
         <el-carousel-item>
           <div class="big_title_text">全球领先的人工智能认知交互企业</div>
           <p class="big_title_two">致力于智能产业前沿科技创新，持续为企业智能赋能价值</p>
+        </el-carousel-item>
+        <el-carousel-item >
+          <!-- <h3>AI电销机器人帮你迅速成单</h3> -->
+           <div class="big_title_text">xxx电销机器人帮你迅速成单</div>
+          <p class="big_title_two">成本砍掉20% 业绩提升200%</p>
         </el-carousel-item>
       </el-carousel>
 
@@ -78,8 +84,8 @@
 						<dl>
 							<div class="number">
 								<span class="animateNum" data-animatetype="num" data-animatetarget="15">{{item.number}}</span>
-                <img :src="item.src">
                 <i>{{item.icon}}</i>
+                <img :src="item.src">
 							</div>
 							<dt>{{item.adText}}</dt>
 							<dd class="info">{{item.text}}<em>{{item.number}}{{item.icon}}</em>以上</dd>
@@ -114,7 +120,7 @@
       <el-button @click="dialogFormVisible = true" type="primary">申请代理</el-button>
       <!-- <el-button type="primary" icon="el-icon-service" @click="dialogFormVisible = true"></el-button> -->
     </el-row>
-    <el-dialog title="加盟申请" :visible.sync="dialogFormVisible" width="30%">
+    <el-dialog title="加盟申请" :visible.sync="dialogFormVisible" width="380px">
       <el-form :model="form" :rules="rules">
         <el-form-item label="姓名" :label-width="formLabelWidth" prop="name">
           <el-input v-model="form.name" autocomplete="off" clearable></el-input>
@@ -125,7 +131,7 @@
         <el-form-item label="电子邮箱" :label-width="formLabelWidth" prop="email">
           <el-input v-model="form.email" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="备注" :label-width="formLabelWidth">
+        <el-form-item label="留言" :label-width="formLabelWidth">
           <el-input v-model="form.des" autocomplete="off" clearable></el-input>
           <!-- <el-select v-model="form.region" placeholder="请选择活动区域">
             <el-option label="区域一" value="shanghai"></el-option>
@@ -191,7 +197,7 @@ export default {
       dataShowList:[{
         id:1,
         number:15,
-        icon:"备",
+        icon:"倍",
         text:"提升",
         src:'/img/png/up.png',
         adText:"时间利用率"
@@ -356,7 +362,7 @@ export default {
   color: #475669;
   font-size: 18px;
   opacity: 0.75;
-  line-height: 300px;
+  line-height: 250px;
   margin: 0;
   text-align: center;
 }
@@ -489,6 +495,7 @@ body {
   background-color: #f7f7f7;
   margin-bottom: 30px;
   padding-top: 15px;
+  flex-wrap: wrap
 }
 .chart_box_item {
   // width: 400px;
@@ -496,7 +503,8 @@ body {
   height: 400px;
 }
 .chart_item {
-  width: 48%;
+  width: 730px;
+      margin-top: 20px;
   // height: 400px;
   // display: flex;
   //   flex-flow: column;
@@ -515,6 +523,7 @@ body {
 }
 .user_portrait_content {
   width: 100%;
+      height: 320px;
   margin-top: 25px;
   height: calc(55vh - 35px);
   display: flex;
@@ -573,7 +582,7 @@ body {
 .IndexTher{
   width: 100%;
   padding: 70px 0px;
-  height: 450px;
+  min-height: 450px;
 }
 .IndexTwo .title, .IndexTher .title, .IndexFour .title {
     text-align: center;
@@ -628,6 +637,7 @@ em, i {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap
 }
 .number img{
   width: 20px;
@@ -637,19 +647,22 @@ em, i {
   border-radius: 50%
 }
 .big_title_text{
-  line-height: 60px;
+  height: 200px;
+ padding-top: 120px;
     font-size: 44px;
     font-weight: 700;
     color: #0a0a0a;
-    margin: 0 0 0 80px;
+    // margin: 0 0 0 80px;
     z-index: 99;
     position: relative;
+    text-align: center;
   }
   .big_title_two{
-    margin: 60px 0 0 80px;
-    line-height: 22px;
+    // margin: 60px 0 0 80px;
+    line-height:35px;
     font-size: 24px;
     color: #222;
     font-weight: 400;
+        text-align: center;
   }
 </style>
