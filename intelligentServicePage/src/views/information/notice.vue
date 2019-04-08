@@ -4,7 +4,7 @@
       <div class="table_box bottom_box">
   <el-row>
   <el-button type="primary" size='small' @click="deletNotice">删除</el-button>
-  <el-button type="primary" size='small' @click="changeState">确认查看</el-button>
+  <el-button type="primary" size='small' @click="changeStates">确认查看</el-button>
 </el-row>
 </div>
   <el-table
@@ -110,21 +110,7 @@ import { Message} from 'element-ui'
           }
       })
       },
-      changeState(ID){
-        let selectList=this.multipleSelection;
-        let params=[];
-        if(!!ID){
-          params.push({
-            id:ID
-          })
-        }else if(selectList.length<1){
-          return;
-        }
-        for(let i=0;i<selectList.length;i++){
-          params.push({
-            id:selectList[i].id
-          })
-        }
+      changeStatepost(params){
         service.updateContactState(params).then(res=>{
         if(!!res){
             const data = res.data
@@ -146,6 +132,27 @@ import { Message} from 'element-ui'
             
           }
       })
+
+      },
+      changeState(ID){
+        let params=[];
+          params.push({
+            id:ID})
+          this.changeStatepost(params)
+      },
+      changeStates(){
+        let selectList=this.multipleSelection;
+        let params=[];
+        if(selectList.length<1){
+          return;
+        }
+        for(let i=0;i<selectList.length;i++){
+          params.push({
+            id:selectList[i].id
+          })
+        }
+        this.changeStatepost(params)
+
       },
       deletNotice(){
         let selectList=this.multipleSelection;
