@@ -11,7 +11,6 @@ import '@/permission' // permission control
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/styles/index.scss' // global css
-// import '../public/mock' // mock data
 import echarts from 'echarts'
 
 Vue.prototype.$echarts = echarts
