@@ -150,7 +150,7 @@
 <script>
 import service from "@/utils/service"
 import { Message, Loading } from 'element-ui'
-// let png = require('../../assets/img/png/');
+let phone = require('../../assets/img/png/phone.png');
 export default {
   data() {
     let checkPhone = (rule, value, callback) => {
@@ -231,7 +231,7 @@ export default {
         text:"提升",
         adText:"客户满意度"
       }],
-      candoItem:[{id:0,candoIteTitle:'自动拨打',candoItemDes:'客户资料一键批量导入，随心设定自动拨打参数',candoImg:'../../assets/img/png/phone.png'},
+      candoItem:[{id:0,candoIteTitle:'自动拨打',candoItemDes:'客户资料一键批量导入，随心设定自动拨打参数',candoImg:phone},
       {id:1,candoIteTitle:'智能沟通',candoItemDes:'真人语音交互，专业业务解答；主动引导过程，客户提问对答如流',candoImg:'../../assets/img/png/chart.png'},
       {id:2,candoIteTitle:'自动记录',candoItemDes:'通话录音、识别文本自动存取，客户业务关注点自动标出',candoImg:'../../assets/img/png/record.png'},
       {id:3,candoIteTitle:'自动分类',candoItemDes:'机器学习，神经网络算法自动识别客户意向并准确分级，可直接根据客户意愿强弱区分跟进优先级，以便快速达成交易',candoImg:'../../assets/img/png/data.png'},
