@@ -8,7 +8,7 @@ const service= {
   // 用户登录
     async login(params){
         const sendData = params;
-        const url =HOST+'/userManage/login';
+        const url =HOST+'/account/userAuth';
         const [err, res] =await to(api.post(url,sendData))
           if (err) {
             console.log('ERROR: Location: login, Reason:' + err.errMsg);

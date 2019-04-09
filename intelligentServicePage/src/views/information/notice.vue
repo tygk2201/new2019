@@ -77,10 +77,13 @@ import { Message} from 'element-ui'
         totalContat:0,
         multipleSelection: [],
         currentPage: 1,
+        token:''
       }
     },
     mounted(){
       this.getNoticeList()
+      this.token=this.$store.user.token 
+      console.log(this.token)
     },
 
     methods: {

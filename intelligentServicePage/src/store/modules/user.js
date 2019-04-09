@@ -35,8 +35,8 @@ const user = {
           if(!!res){
             const data = res.data
             if(!!data.status){
-              setToken('admin-token')
-              commit('SET_TOKEN', 'admin-token')
+              setToken(data.data.token)
+              commit('SET_TOKEN', data.data.token)
               resolve()
             }else{
               Message({
