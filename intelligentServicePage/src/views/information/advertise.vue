@@ -48,19 +48,19 @@
             <div class="avatar"/>
             <div class="path_placeholder"/>
             <div id="aroundTop" class="move">
-              <img src="/img/png/al.png" alt width="50" height="50">
+              <img src="@img/img/png/al.png" alt width="50" height="50">
               <div>阿里巴巴</div>
             </div>
             <div id="aroundRight" class="move">
-              <img src="/img/png/xunfei.jpg" alt width="50" height="50" >
+              <img src="@img/img/png/xunfei.jpg" alt width="50" height="50" >
               <div>科达讯飞</div>
             </div>
             <div id="aroundBottom" class="move">
-              <img src="/img/png/baidu.png" alt width="50" height="50">
+              <img src="@img/img/png/baidu.png" alt width="50" height="50">
               <div>百度云</div>
             </div>
             <div id="aroundLeft" class="move">
-              <img src="/img/png/dui.jpg" alt width="50" height="50">
+              <img src="@img/img/png/dui.jpg" alt width="50" height="50">
               <div>思必驰</div>
             </div>
           </div>
@@ -150,6 +150,7 @@
 <script>
 import service from "@/utils/service"
 import { Message, Loading } from 'element-ui'
+// let png = require('../../assets/img/png/');
 export default {
   data() {
     let checkPhone = (rule, value, callback) => {
@@ -199,43 +200,43 @@ export default {
         number:15,
         icon:"倍",
         text:"提升",
-        src:'/img/png/up.png',
+        src:'@img/img/png/up.png',
         adText:"时间利用率"
       },{
         id:2,
         number:80,
         icon:"%",
         text:"节约",
-        src:'/img/png/down.png',
+        src:'@img/img/png/down.png',
         adText:"人力成本"
       },{
         id:3,
         number:350,
         icon:"%",
         text:"提升",
-        src:'/img/png/up.png',
+        src:'@img/img/png/up.png',
         adText:"销售业绩"
       },{
         id:4,
-        src:'/img/png/down.png',
+        src:'@img/img/png/down.png',
         number:55,
          icon:"%",
         text:"下降",
         adText:"管理成本"
       },{
         id:5,
-        src:'/img/png/up.png',
+        src:'@img/img/png/up.png',
         number:45,
          icon:"%",
         text:"提升",
         adText:"客户满意度"
       }],
-      candoItem:[{id:0,candoIteTitle:'自动拨打',candoItemDes:'客户资料一键批量导入，随心设定自动拨打参数',candoImg:'/img/png/phone.png'},
-      {id:1,candoIteTitle:'智能沟通',candoItemDes:'真人语音交互，专业业务解答；主动引导过程，客户提问对答如流',candoImg:'/img/png/chart.png'},
-      {id:2,candoIteTitle:'自动记录',candoItemDes:'通话录音、识别文本自动存取，客户业务关注点自动标出',candoImg:'/img/png/record.png'},
-      {id:3,candoIteTitle:'自动分类',candoItemDes:'机器学习，神经网络算法自动识别客户意向并准确分级，可直接根据客户意愿强弱区分跟进优先级，以便快速达成交易',candoImg:'/img/png/data.png'},
-      {id:4,candoIteTitle:'自动分析',candoItemDes:'准确识别客户性别、年龄、兴趣点、情绪，通话完毕自动生成分析报表',candoImg:'/img/png/swan.png'},
-      {id:5,candoIteTitle:'辅助',candoItemDes:'推广精英跟进意向客户时，实时匹配客户问题的优质答案笔记，提升推广精英通话有效率和成交率',candoImg:'/img/png/people.png'}]
+      candoItem:[{id:0,candoIteTitle:'自动拨打',candoItemDes:'客户资料一键批量导入，随心设定自动拨打参数',candoImg:'../../assets/img/png/phone.png'},
+      {id:1,candoIteTitle:'智能沟通',candoItemDes:'真人语音交互，专业业务解答；主动引导过程，客户提问对答如流',candoImg:'../../assets/img/png/chart.png'},
+      {id:2,candoIteTitle:'自动记录',candoItemDes:'通话录音、识别文本自动存取，客户业务关注点自动标出',candoImg:'../../assets/img/png/record.png'},
+      {id:3,candoIteTitle:'自动分类',candoItemDes:'机器学习，神经网络算法自动识别客户意向并准确分级，可直接根据客户意愿强弱区分跟进优先级，以便快速达成交易',candoImg:'../../assets/img/png/data.png'},
+      {id:4,candoIteTitle:'自动分析',candoItemDes:'准确识别客户性别、年龄、兴趣点、情绪，通话完毕自动生成分析报表',candoImg:'../../assets/img/png/swan.png'},
+      {id:5,candoIteTitle:'辅助',candoItemDes:'推广精英跟进意向客户时，实时匹配客户问题的优质答案笔记，提升推广精英通话有效率和成交率',candoImg:'../../assets/img/png/people.png'}]
     };
   },
   mounted() {
@@ -569,7 +570,7 @@ body {
     position: absolute;
     top: 100px;
     left: 100px;
-    background: url("/img/icons/logo.jpg") no-repeat center center;
+    background: url("../../assets/img/icons/logo.jpg") no-repeat center center;
     background-size: 100% 100%;
   }
 }

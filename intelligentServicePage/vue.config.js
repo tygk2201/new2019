@@ -75,24 +75,23 @@ module.exports = {
     config.module
       .rule('eslint')
       .exclude
-      .add('src/lib')
+      .add('/Users/maybexia/Downloads/FE/community_built-in/src/lib')
       .end()
 
     config.module
       .rule('images')
+      .test(/\.png|jpg|gif$/)
       .use('url-loader')
-      .tap(options =>
-        merge(options, {
+      .loader('url-loader')
+      .options({
           limit: 5120,
         })
-      )
     //路径重命名
     config.resolve.alias
       .set("@", resolve("src"))
-      .set('_img', resolve('src/assets'))
+      .set('@img', resolve('src/assets'))
 
-    config.module.rules.delete("svg");
-
+    config.module.rules.delete("svg")
     config.module
       .rule('svg-smart')
       .test(/\.svg$/)

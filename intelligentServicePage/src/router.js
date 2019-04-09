@@ -19,18 +19,18 @@ export default new Router({
       hidden: true,
       component: ()=>import('@/views/information/advertise')
     },
-    // {
-    //   path: '/',
-    //   component: Layout,
-    //   redirect: '/home',
-    //   name: 'home',
-    //   // hidden: true,
-    //   children: [{
-    //     path: 'home',
-    //     component: () => import('@/views/home/index'),
-    //     meta: { title: '主页', icon: 'link' },
-    //   }]
-    // },
+    {
+      path: '/',
+      component: Layout,
+      redirect: '/home',
+      name: 'home',
+      // hidden: true,
+      children: [{
+        path: 'home',
+        component: () => import('@/views/home/index'),
+        meta: { title: '主页', icon: 'link' },
+      }]
+    },
     // {
     //   path: '/intelligent',
     //   component: Layout,
