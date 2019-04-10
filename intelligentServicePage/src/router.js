@@ -28,27 +28,27 @@ export default new Router({
       children: [{
         path: 'home',
         component: () => import('@/views/home/index'),
-        meta: { title: '主页', icon: 'link' },
+        meta: { title: '主页(开发中)', icon: 'link' },
       }]
     },
-    // {
-    //   path: '/intelligent',
-    //   component: Layout,
-    //   redirect: '/intelligent/first',
-    //   name: 'intelligent',
-    //   meta: { title: '一级菜单', icon: 'tree' },
-    //   children: [{
-    //     path: 'first',
-    //     name:'first',
-    //     component: () => import('@/views/intelligent/first/index'),
-    //     meta: { title: '菜单一', icon: 'table' }
-    //   },{
-    //     path: 'second',
-    //     name:'second',
-    //     component: () => import('@/views/intelligent/second/index'),
-    //     meta: { title: '菜单二', icon: 'table' }
-    //   }]
-    // },
+    {
+      path: '/intelligent',
+      component: Layout,
+      redirect: '/intelligent/first',
+      name: 'intelligent',
+      meta: { title: 'AI机器人(开发中)', icon: 'tree' },
+      children: [{
+        path: 'second',
+        name:'second',
+        component: () => import('@/views/intelligent/second/index'),
+        meta: { title: '数据列表', icon: 'table' }
+      },{
+        path: 'first',
+        name:'first',
+        component: () => import('@/views/intelligent/first/index'),
+        meta: { title: '测试', icon: 'table' }
+      }]
+    },
     {
       path: '/information',
       component: Layout,
