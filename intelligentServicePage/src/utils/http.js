@@ -1,8 +1,9 @@
 import axios from 'axios'
 import qs from "qs"
 import { Message} from 'element-ui'
+import store from './../store'
 
-// axios.defaults.headers = '请求头'
+// axios.defaults.headerscommon["token"]  = store.getters.token
 
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url

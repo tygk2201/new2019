@@ -3,6 +3,9 @@ const HOST='http://47.105.33.160:8888/acs';
 import to from "./to";
 import api from './api.js'
 import { Message, Loading } from 'element-ui'
+import store from './../store'
+import axios from 'axios'
+
 
 const service= {
   // 用户登录
@@ -31,6 +34,7 @@ const service= {
     },
     //加盟申请
     async addContent(params){
+      axios.defaults.headerscommon["token"]  = store.getters.token
       const sendData = params;
       const url =HOST+'/contact/addContact';
       const [err, res] =await to(api.post(url,sendData))
@@ -47,6 +51,8 @@ const service= {
   //获取消息列表
   async getJoinList(params){
     const sendData = params;
+    // const sendData = Object.assign(params,{'token':store.getters.token});
+    console.log(sendData)
     const url =HOST+'/contact/listContact';
     const [err, res] =await to(api.post(url,sendData))
       if (err) {
@@ -61,7 +67,8 @@ const service= {
 },
 //修改消息状态
 async updateContactState(params){
-  const sendData = params;
+  //const sendData = params;
+  const sendData = Object.assign(params,{'token':token});
   const url =HOST+'/contact/updateContactState';
   const [err, res] =await to(api.post(url,sendData))
     if (err) {
@@ -76,7 +83,8 @@ async updateContactState(params){
 },
 //删除消息状态
 async deleteContact(params){
-  const sendData = params;
+  //const sendData = params;
+  const sendData = Object.assign(params,{'token':token});
   const url =HOST+'/contact/deleteContact';
   const [err, res] =await to(api.post(url,sendData))
     if (err) {

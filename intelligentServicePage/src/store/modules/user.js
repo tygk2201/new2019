@@ -31,7 +31,7 @@ const user = {
     Login({ commit }, userInfo) {
       const username = userInfo.acc.trim()
       return new Promise((resolve, reject) => {
-        service.login({'userName':username,'password':userInfo.pass}).then(res=>{
+        service.login({'account':username,'password':userInfo.pass}).then(res=>{
           if(!!res){
             const data = res.data
             if(!!data.status){

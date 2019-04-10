@@ -82,15 +82,15 @@ import { Message} from 'element-ui'
     },
     mounted(){
       this.getNoticeList()
-      this.token=this.$store.user.token 
-      console.log(this.token)
     },
 
     methods: {
       getNoticeList(){
         let params={
-          currentPage:this.currentPage,
-          pageSize:10
+          'orderType':'',
+          'orderValue':'',
+          'page':this.currentPage,
+          'size':10
         };
       service.getJoinList(params).then(res=>{
         if(!!res){
