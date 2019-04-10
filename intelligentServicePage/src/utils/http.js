@@ -7,17 +7,18 @@ import { getToken } from '@/utils/auth' // getToken from cookie
 // axios.defaults.headers.common["token"]  = 'ffffff'
 
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api 的 base_url
+  baseURL: 'http://47.105.33.160:8888', // api 的 base_url
   timeout: 5000 // request timeout
 })
 
 // request interceptor  拦截器设置
-service.interceptors.request.use(
+axios.interceptors.request.use(
   config => {
-    // Do something before request is sent
-    if (getToken()) {
-      // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-      config.headers['token'] = getToken()
+    // 让每个请求携带token-- ['token']
+    var xtoken = getToken()
+    var url=config.url
+    if(xtoken!=null&&url!='http://47.105.33.160:8888/acs/contact/addContact'){
+      config.headers['token'] = xtoken
     }
     return config
   },
