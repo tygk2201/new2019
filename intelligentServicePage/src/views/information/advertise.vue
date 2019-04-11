@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="ad">
-      <el-carousel :interval="5000" arrow="always" height="400px">
-        <el-carousel-item>
-          <div class="big_title_text">xxx机器人作为智能专业销售客服</div>
+      <el-carousel :interval="5000" arrow="always" height="520px">
+        <el-carousel-item class="item_big_box">
+          <div class="big_title_text">呼王机器人作为智能专业销售客服</div>
           <p class="big_title_two">开启电销与客服的革命时代</p>
         </el-carousel-item>
-        <el-carousel-item>
+        <el-carousel-item class="item_big_box">
           <div class="big_title_text">全球领先的人工智能认知交互企业</div>
           <p class="big_title_two">致力于智能产业前沿科技创新，持续为企业智能赋能价值</p>
         </el-carousel-item>
-        <el-carousel-item >
+        <el-carousel-item class="item_big_box">
           <!-- <h3>AI电销机器人帮你迅速成单</h3> -->
-           <div class="big_title_text">xxx电销机器人帮你迅速成单</div>
+           <div class="big_title_text">呼王电销机器人帮你迅速成单</div>
           <p class="big_title_two">成本砍掉20% 业绩提升200%</p>
         </el-carousel-item>
       </el-carousel>
@@ -36,8 +36,9 @@
       <el-button v-popover:popover1 round type="primary">电话咨询</el-button>
       <el-button round @click="dialogFormVisible = true" type="primary">申请代理</el-button>
     </div>
-    <div class="title_bottom">公司优势</div>
+    
     <div class="box_chart">
+      <div class="title_bottom">公司优势</div>
       <div class="chart_item">
         <div class="chart_item_title">
           <span class="col_Header_tit">合作伙伴</span>
@@ -76,7 +77,7 @@
     <div class="IndexTher">
 			<div class="TextCenter">
 				<div class="title">
-					<div class="text">使用言通电话机器人，服务效率会得到怎样的提升</div>
+					<div class="text">使用呼王电话机器人，服务效率会得到怎样的提升</div>
 					<div class="xian"></div>
 				</div>
 				<div class="ListMain" >
@@ -96,7 +97,7 @@
 			</div>
 		</div>
     <div class="dm-module">
-      <div class="module-title">xxx电话机器人能帮你做什么</div>
+      <div class="module-title">呼王电话机器人能帮你做什么</div>
       <div class="module-items">
         <div class="cando-item" v-for="item in candoItem" :key="item.id">
           <img class="img_icon" :src="item.candoImg" alt>
@@ -144,6 +145,9 @@
         <el-button type="primary" @click="onSubmit">确 定</el-button>
       </div>
     </el-dialog>
+    <div class="footer">
+      <span>Copyright&nbsp;&copy;&nbsp;苏州中太智能科技有限公司</span>
+    </div>
   </div>
 </template>
 
@@ -200,32 +204,32 @@ export default {
         number:15,
         icon:"倍",
         text:"提升",
-        src:'/img/up.png',
+        src:'/img/arrow-up.svg',
         adText:"时间利用率"
       },{
         id:2,
         number:80,
         icon:"%",
         text:"节约",
-        src:'/img/down.png',
+        src:'/img/arrow-down.svg',
         adText:"人力成本"
       },{
         id:3,
         number:350,
         icon:"%",
         text:"提升",
-        src:'/img/up.png',
+        src:'/img/arrow-up.svg',
         adText:"销售业绩"
       },{
         id:4,
-        src:'/img/down.png',
+        src:'/img/arrow-down.svg',
         number:55,
          icon:"%",
         text:"下降",
         adText:"管理成本"
       },{
         id:5,
-        src:'/img/up.png',
+        src:'/img/arrow-up.svg',
         number:45,
          icon:"%",
         text:"提升",
@@ -348,8 +352,9 @@ export default {
 }
 .button_position {
   position: fixed;
-  right: 1%;
-  bottom: 30%;
+  right: 0.5%;
+  bottom: 40%;
+  z-index: 999;
 }
 .tab_box {
   display: flex;
@@ -367,15 +372,15 @@ export default {
   margin: 0;
   text-align: center;
 }
+.el-carousel__item{
+  padding: 15px;
+  background: rgb(48, 65, 86);
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
 }
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-
 .el-row {
   margin-bottom: 20px;
 }
@@ -392,7 +397,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #99a9bf;
+  background-color: #d3dce6;
 }
 .grid-content span:nth-child(1) {
   font-family: PingFangSC-Regular;
@@ -505,12 +510,8 @@ body {
 }
 .chart_item {
   width: 730px;
-      margin-top: 20px;
-  // height: 400px;
-  // display: flex;
-  //   flex-flow: column;
-  //   justify-content: center;
-  //   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .chart_item_title {
   text-align: center;
@@ -536,7 +537,7 @@ body {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  border: 1px dashed gray;
+  border: 1px dashed rgb(7, 54, 68);
   box-sizing: border-box;
   .move {
     position: absolute;
@@ -551,12 +552,13 @@ body {
     padding: 0 20px;
     box-sizing: border-box;
     color: #fff;
-    background: linear-gradient(to right, #fff, #ddd);
+    // background: linear-gradient(to right, #fff, #ddd);
+    background: rgb(145, 199, 174)
   }
   .path_placeholder {
     width: 140px;
     height: 140px;
-    border: 1px solid red;
+    border: 1px solid rgb(7, 54, 68);
     border-radius: 50%;
     box-sizing: border-box;
     position: absolute;
@@ -570,7 +572,7 @@ body {
     position: absolute;
     top: 100px;
     left: 100px;
-    background: url("../../assets/img/icons/logo.jpg") no-repeat center center;
+    background: url("/img/work.png") no-repeat center center;
     background-size: 100% 100%;
   }
 }
@@ -578,6 +580,7 @@ body {
   width: 100%;
   font-size: 32px;
   text-align: center;
+  margin: 15px 15px;
 }
 
 .IndexTher{
@@ -628,7 +631,8 @@ body {
 }
 .IndexTher .ListMain .list dd.info em {
     font-size: 24px;
-    color: #f44343;
+    margin: 0 5px;
+    color: rgba(0,0,0,.43);
 }
 em, i {
     font-style: normal;
@@ -637,7 +641,7 @@ em, i {
 .ListMain{
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap
 }
 .number img{
@@ -648,13 +652,10 @@ em, i {
   border-radius: 50%
 }
 .big_title_text{
-  height: 200px;
- padding-top: 120px;
-    font-size: 44px;
+  height: 100px;
+    font-size: 50px;
     font-weight: 700;
-    color: #0a0a0a;
-    // margin: 0 0 0 80px;
-    z-index: 99;
+    color: #fff;
     position: relative;
     text-align: center;
   }
@@ -662,8 +663,19 @@ em, i {
     // margin: 60px 0 0 80px;
     line-height:35px;
     font-size: 24px;
-    color: #222;
+    color: #fff;
     font-weight: 400;
         text-align: center;
+  }
+  .footer{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
   }
 </style>
