@@ -11,7 +11,7 @@ const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
   NProgress.start()
 
-  if(to.path ==='/information/advertise'){
+  if(to.path ==='/information/advertise'||to.path==='/ex2'){
     next()
   }else if (getToken()) {
     if (to.path === '/login') {

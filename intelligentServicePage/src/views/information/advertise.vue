@@ -2,15 +2,15 @@
   <div>
     <div class="ad">
       <el-carousel :interval="5000" arrow="always" height="520px">
-        <el-carousel-item class="item_big_box">
+        <el-carousel-item>
           <div class="big_title_text">呼王机器人作为智能专业销售客服</div>
           <p class="big_title_two">开启电销与客服的革命时代</p>
         </el-carousel-item>
-        <el-carousel-item class="item_big_box">
+        <el-carousel-item>
           <div class="big_title_text">全球领先的人工智能认知交互企业</div>
           <p class="big_title_two">致力于智能产业前沿科技创新，持续为企业智能赋能价值</p>
         </el-carousel-item>
-        <el-carousel-item class="item_big_box">
+        <el-carousel-item>
           <!-- <h3>AI电销机器人帮你迅速成单</h3> -->
            <div class="big_title_text">呼王电销机器人帮你迅速成单</div>
           <p class="big_title_two">成本砍掉20% 业绩提升200%</p>
@@ -363,15 +363,6 @@ export default {
   align-items: center;
   text-align: center;
 }
-
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 250px;
-  margin: 0;
-  text-align: center;
-}
 .el-carousel__item{
   padding: 15px;
   background: rgb(48, 65, 86);
@@ -414,7 +405,9 @@ export default {
   width: 100%;
   background-color: #f7f7f7;
   margin: 0 auto;
-  padding: 80px;
+  padding-top: 80px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 body {
   font-family: "Helvetica Neue", "Hiragino Sans GB", "WenQuanYi Micro Hei",
@@ -525,9 +518,7 @@ body {
 }
 .user_portrait_content {
   width: 100%;
-      height: 320px;
-  margin-top: 25px;
-  height: calc(55vh - 35px);
+  margin-top: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -585,7 +576,7 @@ body {
 
 .IndexTher{
   width: 100%;
-  padding: 70px 0px;
+  padding: 40px 0px;
   min-height: 450px;
 }
 .IndexTwo .title, .IndexTher .title, .IndexFour .title {
@@ -593,7 +584,7 @@ body {
     font-size: 24px;
     color: #666666;
     margin-bottom: 60px;
-    // margin-top: 20px;
+    padding: 15px;
 }
 .IndexTwo .title .xian, .IndexTher .title .xian, .IndexFour .title .xian {
     width: 115px;
@@ -652,20 +643,17 @@ em, i {
   border-radius: 50%
 }
 .big_title_text{
-  height: 100px;
     font-size: 50px;
     font-weight: 700;
     color: #fff;
-    position: relative;
     text-align: center;
+    margin-bottom: 20px;
   }
   .big_title_two{
-    // margin: 60px 0 0 80px;
-    line-height:35px;
     font-size: 24px;
     color: #fff;
     font-weight: 400;
-        text-align: center;
+    text-align: center;
   }
   .footer{
     width: 100%;
