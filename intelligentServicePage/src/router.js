@@ -12,12 +12,12 @@ export default new Router({
       path: '/login',
       name: 'login',
       hidden: true,
-      component: ()=>import('@/views/login')
+      component:resolve => require(['@/views/login'],resolve),
     },
     {
       path: '/information/advertise',
       hidden: true,
-      component: ()=>import('@/views/information/advertise')
+      component:resolve => require(['@/views/information/advertise'],resolve),
     },
     {
       path: '/',
@@ -27,7 +27,7 @@ export default new Router({
       // hidden: true,
       children: [{
         path: 'home',
-        component: () => import('@/views/home/index'),
+        component:resolve => require(['@/views/home/index'],resolve),
         meta: { title: '主页(开发中)', icon: 'link' },
       }]
     },
@@ -40,12 +40,12 @@ export default new Router({
       children: [{
         path: 'second',
         name:'second',
-        component: () => import('@/views/intelligent/second/index'),
+        component:resolve => require(['@/views/intelligent/second/index'],resolve),
         meta: { title: '数据列表', icon: 'table' }
       },{
         path: 'first',
         name:'first',
-        component: () => import('@/views/intelligent/first/index'),
+        component:resolve => require(['@/views/intelligent/first/index'],resolve),
         meta: { title: '测试', icon: 'table' }
       }]
     },
@@ -58,24 +58,12 @@ export default new Router({
       children: [{
         path: 'notice',
         name:'notice',
-        component: () => import('@/views/information/notice'),
+        component:resolve => require(['@/views/information/notice'],resolve),
         meta: { title: '消息中心', icon: 'table' }
       },{
         path: '/information/advertise',
         meta: { title: '广告推广', icon: 'table' }
       }]
     },
-    // {
-    //   path: '/test',
-    //   component: Layout,
-    //   children: [
-    //     {
-    //       path: 'index',
-    //       name: 'test',
-    //       component: () => import('@/views/test/index'),
-    //       meta: { title: 'Test', icon: 'form' }
-    //     }
-    //   ]
-    // },
   ]
 })

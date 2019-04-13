@@ -29,6 +29,7 @@ module.exports = {
 
   // 生产环境 sourceMap
   productionSourceMap: false,
+  //element 按需应用
 
   // cors 相关 https://jakearchibald.com/2017/es-modules-in-browsers/#always-cors
   // corsUseCredentials: false,
