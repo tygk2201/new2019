@@ -36,6 +36,13 @@
       <el-button v-popover:popover1 round type="primary">电话咨询</el-button>
       <el-button round @click="dialogFormVisible = true" type="primary">申请代理</el-button>
     </div>
+    <div class="bottom_box">
+      <div class="first_title">呼王智能客服系统获苏州市场官方推荐</div>
+      <div class="second_title">呼王智能客服系统8000+精品应用中脱颖而出，获首页推荐
+阿里云云市场提供线上担保交易、全程服务监管，保障您的资金安全和服务质量</div>
+      <img src="@img/huwang.png"/>
+
+    </div>
     
     <div class="box_chart">
       <div class="title_bottom">公司优势</div>
@@ -355,6 +362,27 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.bottom_box{
+  margin: 30px auto 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.first_title{
+  width: 100%;
+  text-align: center;
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.9)
+}
+.second_title{
+  width: 100%;
+  margin: 30px auto 20px;
+  font-size: 18px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.43)
+}
 .phone_box{
   width: 100%;
   height: 50px;
