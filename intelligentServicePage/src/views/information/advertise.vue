@@ -28,7 +28,7 @@
       <el-popover
         ref="popover1"
         placement="top-start"
-        title="联系电话"
+        title="客服电话"
         width="200"
         trigger="hover"
         content="13621886041"
@@ -146,6 +146,16 @@
       </div>
     </el-dialog>
     <div class="footer">
+      <div class="phone_box">
+      <div class="photo_footer">
+        <span>客服电话：</span>
+        <span>64756438754856</span>
+      </div>
+      <div class="photo_footer">
+        <span>招商电话：</span>
+        <span>64756438754856</span>
+      </div>
+      </div>
       <span>Copyright&nbsp;&copy;&nbsp;苏州中太智能科技有限公司</span>
     </div>
   </div>
@@ -259,13 +269,13 @@ export default {
             const data = res.data
             if(!!data.status){
               Message({
-                message: data.description?data.description:"申请成功！",
+                message: "申请提交成功",
                 type: 'success',
                 duration: 5 * 1000
               })
             }else{
               Message({
-                message: data.description?data.description:"申请失败！",
+                message: "申请提交失败，请重试！",
                 type: 'error',
                 duration: 5 * 1000
               })
@@ -345,6 +355,22 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.phone_box{
+  width: 100%;
+  height: 50px;
+  margin-top: 15px;
+  margin-bottom:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.photo_footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 40px;
+}
 .ad {
   width: 100%;
   height: auto;
@@ -408,6 +434,7 @@ export default {
   padding-top: 80px;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 30px;
 }
 body {
   font-family: "Helvetica Neue", "Hiragino Sans GB", "WenQuanYi Micro Hei",
@@ -660,7 +687,7 @@ em, i {
   }
   .footer{
     width: 100%;
-    height: 30px;
+    // height: 30px;
     margin-bottom: 30px;
     margin-top: 20px;
     display: flex;
@@ -668,5 +695,6 @@ em, i {
     align-items: center;
     font-size: 12px;
     color: #666;
+    flex-flow: column;
   }
 </style>
