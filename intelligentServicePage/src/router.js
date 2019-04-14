@@ -28,7 +28,7 @@ export default new Router({
       children: [{
         path: 'home',
         component:resolve => require(['@/views/home/index'],resolve),
-        meta: { title: '主页(开发中)', icon: 'link' },
+        meta: { title: '主页(开发中)', icon: 'user' },
       }]
     },
     {
@@ -36,17 +36,17 @@ export default new Router({
       component: Layout,
       redirect: '/intelligent/first',
       name: 'intelligent',
-      meta: { title: 'AI机器人(开发中)', icon: 'tree' },
+      meta: { title: 'AI机器人(开发中)', icon: 'table' },
       children: [{
         path: 'second',
         name:'second',
         component:resolve => require(['@/views/intelligent/second/index'],resolve),
-        meta: { title: '数据列表', icon: 'table' }
+        meta: { title: '数据列表', icon: 'message' }
       },{
         path: 'first',
         name:'first',
         component:resolve => require(['@/views/intelligent/first/index'],resolve),
-        meta: { title: '测试', icon: 'table' }
+        meta: { title: '测试', icon: 'form' }
       }]
     },
     {
@@ -59,10 +59,10 @@ export default new Router({
         path: 'notice',
         name:'notice',
         component:resolve => require(['@/views/information/notice'],resolve),
-        meta: { title: '消息中心', icon: 'table' }
+        meta: { title: '消息中心', icon: 'message' }
       },{
         path: '/information/advertise',
-        meta: { title: '广告推广', icon: 'table' }
+        meta: { title: '广告推广', icon: 'link' }
       }]
     },
   ]

@@ -13,6 +13,7 @@ import '@/permission' // permission control
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/styles/index.scss' // global css
+
 // import echarts from 'echarts'
 let echarts=require('echarts/lib/echarts')
 // 引入折线图等组件

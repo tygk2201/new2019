@@ -87,8 +87,8 @@ import { Message} from 'element-ui'
     methods: {
       getNoticeList(){
         let params={
-          'orderType':'',
-          'orderValue':'',
+          'orderType':'desc',
+          'orderValue':'createDate',
           'page':this.currentPage,
           'size':10
         };
