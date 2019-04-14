@@ -13,7 +13,17 @@ import '@/permission' // permission control
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/styles/index.scss' // global css
-import echarts from 'echarts'
+// import echarts from 'echarts'
+let echarts=require('echarts/lib/echarts')
+// 引入折线图等组件
+// require('echarts/lib/chart/line')
+require('echarts/lib/chart/bar')
+require('echarts/lib/chart/pie')
+require('echarts/lib/chart/radar')
+// 引入提示框和title组件，图例
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+require('echarts/lib/component/legend')
 
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
