@@ -41,6 +41,15 @@
       <div class="second_title">呼王智能客服系统8000+精品应用中脱颖而出，获首页推荐
 阿里云云市场提供线上担保交易、全程服务监管，保障您的资金安全和服务质量</div>
       <img src="@img/huwang.png"/>
+    </div>
+    <div class="bottom_box">
+      <div class="first_title">用呼王，更放心</div>
+      <div class="module-items_item">
+        <div class="showColorOne">自有知识产权，快速产品迭代</div>
+          <div class="showColorsecond">产品品质和服务保障</div>
+            <div class="showColorOne">全国近百家专业化服务中心</div>
+              <div class="showColorsecond">服务中断5倍赔付</div>
+      </div>
 
     </div>
     
@@ -362,6 +371,14 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.module-items_item{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 .bottom_box{
   margin: 30px auto 20px;
   display: flex;
@@ -374,7 +391,9 @@ export default {
   width: 100%;
   text-align: center;
   font-size: 36px;
-  color: rgba(0, 0, 0, 0.9)
+  color: rgba(0, 0, 0, 0.9);
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .second_title{
   width: 100%;
@@ -398,6 +417,27 @@ export default {
   align-items: center;
   width: 300px;
   height: 40px;
+}
+.showColorOne{
+      font-size: 20px;
+    color: #fff;
+    text-align: center;
+    width: 270px;
+    height: 90px;
+    background-color: #3da7f5;
+    line-height: 90px;
+    border-radius: 10px;
+}
+.showColorsecond{
+  line-height: 90px;
+    border-radius: 10px;
+  font-size: 20px;
+    color: #fff;
+    text-align: center;
+    width: 270px;
+    height: 90px;
+    background-color: #50c3fc;
+
 }
 .ad {
   width: 100%;
