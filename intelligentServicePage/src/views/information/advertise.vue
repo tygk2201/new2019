@@ -525,44 +525,45 @@ body {
 }
 #circle {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   border: 1px dashed rgb(7, 54, 68);
   box-sizing: border-box;
   .move {
     position: absolute;
-    width: 160px;
+    width: 125px;
     height: 60px;
-    margin-left: -80px;
-    margin-top: -30px;
+    margin-left: -62px;
+    margin-top: -28px;
     border-radius: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 10px;
     box-sizing: border-box;
     color: #fff;
+    font-size: 14px;
     // background: linear-gradient(to right, #fff, #ddd);
     background: rgb(145, 199, 174)
   }
   .path_placeholder {
-    width: 140px;
-    height: 140px;
+    width: 110px;
+    height: 110px;
     border: 1px solid rgb(7, 54, 68);
     border-radius: 50%;
     box-sizing: border-box;
     position: absolute;
-    top: 80px;
-    left: 80px;
+    top: 64px;
+    left: 64px;
   }
   .avatar {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
     position: absolute;
-    top: 100px;
-    left: 100px;
+    top: 80px;
+    left: 80px;
     background: url("/img/work.png") no-repeat center center;
     background-size: 100% 100%;
   }
@@ -640,7 +641,9 @@ em, i {
   height: 20px;
 }
 .move img{
-  border-radius: 50%
+  border-radius: 50%;
+  width:40px;
+  height:40px;
 }
 .big_title_text{
     font-size: 50px;
