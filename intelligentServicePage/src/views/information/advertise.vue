@@ -113,7 +113,7 @@
 			</div>
 		</div>
      <div class="bottom_box">
-      <div class="first_title">可视化在线配置</div>
+      <div class="first_title">可视化话术配置</div>
       <img src="@img/talk-setting.png" class="second_img"/>
     </div>
     <div class="dm-module">
@@ -376,7 +376,7 @@ export default {
 </script>
 <style scoped lang="less">
 .module-items_item{
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-around;
   align-items: center;
