@@ -112,6 +112,10 @@
 				</div>
 			</div>
 		</div>
+     <div class="bottom_box">
+      <div class="first_title">可视化在线配置</div>
+      <img src="@img/talk-setting.png" class="second_img"/>
+    </div>
     <div class="dm-module">
       <div class="module-title">呼王电话机器人能帮你做什么</div>
       <div class="module-items">
@@ -438,6 +442,9 @@ export default {
     height: 90px;
     background-color: #50c3fc;
 
+}
+.second_img{
+  width: 80%;
 }
 .ad {
   width: 100%;
