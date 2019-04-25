@@ -38,14 +38,14 @@ export default new Router({
       name: 'intelligent',
       meta: { title: 'AI机器人(开发中)', icon: 'table' },
       children: [{
-        path: 'second',
-        name:'second',
-        component:resolve => require(['@/views/intelligent/second/index'],resolve),
-        meta: { title: '数据列表', icon: 'message' }
-      },{
         path: 'first',
         name:'first',
         component:resolve => require(['@/views/intelligent/first/index'],resolve),
+        meta: { title: '数据列表', icon: 'form' }
+      },{
+        path: 'second',
+        name:'second',
+        component:resolve => require(['@/views/intelligent/second/index'],resolve),
         meta: { title: '测试', icon: 'form' }
       }]
     },
