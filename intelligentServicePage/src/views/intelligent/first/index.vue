@@ -27,7 +27,7 @@
     <div class="table_box bottom_box">
       <el-row>
         <el-button type="primary" size="small" @click="dialogAddUser = true">添加客户</el-button>
-        <el-button type="primary" size="small">导入</el-button>
+        <el-button type="primary" size="small" @click="dialogUpload=true">导入</el-button>
         <el-button type="primary" size="small">导出</el-button>
         <el-button type="primary" size="small" @click="addCall(tableData)">加入呼叫</el-button>
         <el-button type="primary" size="small">转到CRM</el-button>
@@ -41,7 +41,7 @@
         tooltip-effect="dark"
         style="width: 100%"
         border
-         @selection-change="handleSelectionChange"
+        @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="35"></el-table-column>
         <el-table-column prop="id" label="ID" width="35"></el-table-column>
@@ -128,11 +128,50 @@
         <el-button type="primary" @click="callSubmit">确 定</el-button>
       </div>
     </el-dialog>
+    <el-dialog title="批量导入客户" :visible.sync="dialogUpload" width="450px">
+      <el-upload
+        class="upload-demo"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :limit="3"
+        :on-exceed="handleExceed"
+        :file-list="fileList"
+      >
+        <el-button size="small" type="primary">选择文件</el-button>
+        <!-- <div slot="tip" class="el-upload__tip">只能上传excel文件</div> -->
+      </el-upload>
+      <el-form :model="callForm" label-position="left" class="margin_form">
+        <el-form-item label="导入批次" :label-width="formLabelWidth" prop="times">
+          <el-input v-model="upload.times" autocomplete="off" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="是否加入呼叫">
+          <el-checkbox
+            label="是"
+            name="type"
+            v-model="upload.isCall"
+            @change="changeUpload(upload.isCall)"
+          ></el-checkbox>
+        </el-form-item>
+        <el-form-item label="模板流程" :label-width="formLabelWidth" v-if="showUpload">
+          <el-select v-model="upload.callType" placeholder="请选择模板">
+            <el-option label="男版" value="0"></el-option>
+            <el-option label="女版" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="任务名称" :label-width="formLabelWidth" prop="name" v-if="showUpload">
+          <el-input v-model="upload.name" autocomplete="off" clearable></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogUpload=false">取 消</el-button>
+        <el-button type="primary" @click="uploadSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { Message, Loading } from 'element-ui'
+import { Message, Loading } from "element-ui";
 const cityOptions = [
   "已接通",
   "关机",
@@ -190,12 +229,23 @@ export default {
           { validator: checkPhone, trigger: "blur" }
         ]
       },
-      ruleCall:{callType:[{required:true,message:"请选择模板",trigger:"blur"}]},
-      dialogCall:false,
-      callForm:{
-        callType:"",
-        name:""
+      ruleCall: {
+        callType: [{ required: true, message: "请选择模板", trigger: "blur" }]
       },
+      dialogCall: false,
+      callForm: {
+        callType: "",
+        name: ""
+      },
+      fileList: [],
+      dialogUpload: false,
+      upload: {
+        times: "",
+        isCall: false,
+        callType: "",
+        name: ""
+      },
+      showUpload: false,
 
       tableData: [
         {
@@ -261,7 +311,7 @@ export default {
         checkedCount > 0 && checkedCount < this.results.length;
     },
     handleSelectionChange(val) {
-        this.multipleSelection = val;
+      this.multipleSelection = val;
     },
     //添加用户
     onSubmit() {
@@ -269,22 +319,45 @@ export default {
       let params = this.form;
     },
     //加入呼叫提交
-    callSubmit(){
-      this.dialogCall=false;
+    callSubmit() {
+      this.dialogCall = false;
     },
     //加入呼叫
-    addCall(){
-      if(this.multipleSelection.length==0){
+    addCall() {
+      if (this.multipleSelection.length == 0) {
         Message({
-                message: "请选择数据",
-                type: 'error',
-                duration: 5 * 1000
-        })
+          message: "请选择数据",
+          type: "error",
+          duration: 5 * 1000
+        });
         return;
       }
-       this.dialogCall=true
+      this.dialogCall = true;
+    },
+    //文件上传
+    handleChange(file, fileList) {
+      this.fileList = fileList.slice(-3);
+    },
+    handleExceed(files, fileList) {
+      Message({
+        message: `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件`,
+        type: "error",
+        duration: 5 * 1000
+      });
+      // this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件`);
+    },
+    //导入确定按钮
+    uploadSubmit() {
+      this.dialogUpload = true;
+    },
+    changeUpload(type) {
+      console.log(type);
+      if (!type) {
+        this.showUpload = false;
+      } else {
+        this.showUpload = true;
+      }
     }
-    
   }
 };
 </script>
@@ -315,6 +388,9 @@ export default {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+}
+.margin_form {
+  margin-top: 30px;
 }
 </style>
 
