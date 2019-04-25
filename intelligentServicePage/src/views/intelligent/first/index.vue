@@ -29,7 +29,7 @@
         <el-button type="primary" size="small" @click="dialogAddUser = true">添加客户</el-button>
         <el-button type="primary" size="small">导入</el-button>
         <el-button type="primary" size="small">导出</el-button>
-        <el-button type="primary" size="small" @click="dialogCall=true">加入呼叫</el-button>
+        <el-button type="primary" size="small" @click="addCall(tableData)">加入呼叫</el-button>
         <el-button type="primary" size="small">转到CRM</el-button>
         <el-button size="small">删除</el-button>
       </el-row>
@@ -41,12 +41,13 @@
         tooltip-effect="dark"
         style="width: 100%"
         border
+         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="35"></el-table-column>
         <el-table-column prop="id" label="ID" width="35"></el-table-column>
         <el-table-column prop="userName" label="客户姓名" width="100"></el-table-column>
         <el-table-column prop="sex" label="性别" width="50"></el-table-column>
-        <el-table-column prop="phoneNumber" label="电话" width="100"></el-table-column>
+        <el-table-column prop="phoneNumber" label="电话" width="120"></el-table-column>
         <el-table-column prop="status" label="通话状态" width="90"></el-table-column>
         <el-table-column prop="grade" label="意向等级" width="100"></el-table-column>
         <el-table-column prop="long" label="通话时长" width="100"></el-table-column>
@@ -75,7 +76,7 @@
         :total="40"
       ></el-pagination>
     </div>
-    <el-dialog title="添加客户" :visible.sync="dialogAddUser" width="450px">
+    <el-dialog title="添加客户" :visible.sync="dialogAddUser" width="500px">
       <el-form :model="form" :rules="rules">
         <el-form-item label="客户名称" :label-width="formLabelWidth" prop="userName">
           <el-input v-model="form.userName" autocomplete="off" clearable></el-input>
@@ -91,10 +92,10 @@
         </el-form-item>
         <el-form-item label="客户类型" :label-width="formLabelWidth">
           <el-select v-model="form.clientType" placeholder="未分类">
-            <el-option label="潜在客户" value="shanghai"></el-option>
-            <el-option label="意向客户" value="beijing"></el-option>
-            <el-option label="试用客户" value="shanghai"></el-option>
-            <el-option label="成交客户" value="shanghai"></el-option>
+            <el-option label="潜在客户" value="0"></el-option>
+            <el-option label="意向客户" value="1"></el-option>
+            <el-option label="试用客户" value="2"></el-option>
+            <el-option label="成交客户" value="3"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="导入批次" :label-width="formLabelWidth" prop="order">
@@ -114,8 +115,8 @@
       <el-form :model="callForm" :rules="ruleCall">
         <el-form-item label="模板流程" :label-width="formLabelWidth">
           <el-select v-model="callForm.callType" placeholder="请选择模板">
-            <el-option label="男版" value="shanghai"></el-option>
-            <el-option label="女版" value="beijing"></el-option>
+            <el-option label="男版" value="0"></el-option>
+            <el-option label="女版" value="1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="任务名称" :label-width="formLabelWidth" prop="name">
@@ -131,6 +132,7 @@
 </template>
 
 <script>
+import { Message, Loading } from 'element-ui'
 const cityOptions = [
   "已接通",
   "关机",
@@ -258,15 +260,31 @@ export default {
       this.isIndeterminate2 =
         checkedCount > 0 && checkedCount < this.results.length;
     },
+    handleSelectionChange(val) {
+        this.multipleSelection = val;
+    },
     //添加用户
     onSubmit() {
       this.dialogAddUser = false;
       let params = this.form;
     },
-    //加入呼叫
+    //加入呼叫提交
     callSubmit(){
       this.dialogCall=false;
+    },
+    //加入呼叫
+    addCall(){
+      if(this.multipleSelection.length==0){
+        Message({
+                message: "请选择数据",
+                type: 'error',
+                duration: 5 * 1000
+        })
+        return;
+      }
+       this.dialogCall=true
     }
+    
   }
 };
 </script>

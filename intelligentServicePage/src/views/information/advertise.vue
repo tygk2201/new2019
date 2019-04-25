@@ -375,6 +375,10 @@ export default {
 };
 </script>
 <style scoped lang="less">
+.el-carousel-item{
+  border: 0;
+  width: 100%;
+}
 .module-items_item{
   width: 80%;
   display: flex;
