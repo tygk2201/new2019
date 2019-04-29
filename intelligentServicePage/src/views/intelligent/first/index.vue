@@ -28,9 +28,9 @@
       <el-row>
         <el-button type="primary" size="small" @click="dialogAddUser = true">添加客户</el-button>
         <el-button type="primary" size="small" @click="dialogUpload=true">导入</el-button>
-        <el-button type="primary" size="small">导出</el-button>
+        <!-- <el-button type="primary" size="small">导出</el-button> -->
         <el-button type="primary" size="small" @click="addCall(tableData)">加入呼叫</el-button>
-        <el-button type="primary" size="small">转到CRM</el-button>
+        <!-- <el-button type="primary" size="small">转到CRM</el-button> -->
         <el-button size="small">删除</el-button>
       </el-row>
     </div>
@@ -132,6 +132,7 @@
       <el-upload
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
+        multiple
         :limit="3"
         :on-exceed="handleExceed"
         :file-list="fileList"
@@ -145,8 +146,9 @@
         </el-form-item>
         <el-form-item label="是否加入呼叫">
           <el-checkbox
-            label="是"
+            label=""
             name="type"
+            accept="excel"
             v-model="upload.isCall"
             @change="changeUpload(upload.isCall)"
           ></el-checkbox>
@@ -340,7 +342,7 @@ export default {
     },
     handleExceed(files, fileList) {
       Message({
-        message: `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件`,
+        message: `当前限制选择 3 个文件`,
         type: "error",
         duration: 5 * 1000
       });
@@ -351,7 +353,6 @@ export default {
       this.dialogUpload = true;
     },
     changeUpload(type) {
-      console.log(type);
       if (!type) {
         this.showUpload = false;
       } else {

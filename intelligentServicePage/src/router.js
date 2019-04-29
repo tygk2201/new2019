@@ -46,7 +46,7 @@ export default new Router({
         path: 'second',
         name:'second',
         component:resolve => require(['@/views/intelligent/second/index'],resolve),
-        meta: { title: '测试', icon: 'form' }
+        meta: { title: '呼叫队列', icon: 'form' }
       }]
     },
     {
