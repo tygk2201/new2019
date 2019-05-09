@@ -8,7 +8,7 @@
           v-model="checkAll"
           @change="handleCheckAllChange"
         >全选</el-checkbox>
-        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+        <el-checkbox-group v-model="state" @change="handleCheckedCitiesChange">
           <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
         </el-checkbox-group>
       </div>
@@ -19,7 +19,7 @@
           v-model="checkAll2"
           @change="handleCheckAllChange2"
         >全选</el-checkbox>
-        <el-checkbox-group v-model="checkedResults" @change="handleCheckedCitiesChange2">
+        <el-checkbox-group v-model="rank" @change="handleCheckedCitiesChange2">
           <el-checkbox v-for="result in results" :label="result" :key="result">{{result}}</el-checkbox>
         </el-checkbox-group>
       </div>
@@ -31,7 +31,7 @@
         <!-- <el-button type="primary" size="small">导出</el-button> -->
         <el-button type="primary" size="small" @click="addCall(tableData)">加入呼叫</el-button>
         <!-- <el-button type="primary" size="small">转到CRM</el-button> -->
-        <el-button size="small">删除</el-button>
+        <el-button size="small" @click="deleteCall(tableData)">删除</el-button>
       </el-row>
     </div>
     <div class="table_box">
@@ -44,21 +44,23 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="35"></el-table-column>
-        <el-table-column prop="id" label="ID" width="35"></el-table-column>
-        <el-table-column prop="userName" label="客户姓名" width="100"></el-table-column>
-        <el-table-column prop="sex" label="性别" width="50"></el-table-column>
-        <el-table-column prop="phoneNumber" label="电话" width="120"></el-table-column>
-        <el-table-column prop="status" label="通话状态" width="90"></el-table-column>
-        <el-table-column prop="grade" label="意向等级" width="100"></el-table-column>
-        <el-table-column prop="long" label="通话时长" width="100"></el-table-column>
-        <el-table-column prop="times" label="呼叫次数" width="100"></el-table-column>
-        <el-table-column prop="des" label="备注" width="100"></el-table-column>
-        <el-table-column prop="order" label="批次" width="50"></el-table-column>
-        <el-table-column label="创建时间" width="120">
-          <template slot-scope="scope">{{ scope.row.startTime }}</template>
+        <el-table-column type="index" label="ID" width="35"></el-table-column>
+        <el-table-column prop="name" label="客户姓名" width="100"></el-table-column>
+        <el-table-column prop="sex" label="性别" width="50">
+          <template slot-scope="scope">{{ scope.row.sex=="0"?"男":"女" }}</template>
         </el-table-column>
-        <el-table-column label="最后更近时间" width="120">
-          <template slot-scope="scope">{{ scope.row.endTime }}</template>
+        <el-table-column prop="phone" label="电话" width="120"></el-table-column>
+        <el-table-column prop="stateString" label="通话状态" width="90"></el-table-column>
+        <el-table-column prop="rankString" label="意向等级" width="100"></el-table-column>
+        <el-table-column prop="callTime" label="通话时长" width="100"></el-table-column>
+        <el-table-column prop="callNum" label="呼叫次数" width="100"></el-table-column>
+        <el-table-column prop="remark" label="备注" width="100"></el-table-column>
+        <el-table-column prop="batch" label="批次" width="50"></el-table-column>
+        <el-table-column label="创建时间" width="137">
+          <template slot-scope="scope">{{ scope.row.createDate }}</template>
+        </el-table-column>
+        <el-table-column label="最后更近时间" width="137">
+          <template slot-scope="scope">{{ scope.row.updateDate }}</template>
         </el-table-column>
         <el-table-column label="操作">
           <template>
@@ -69,7 +71,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage4"
+        :current-page="currentPage"
         :page-sizes="[10, 20, 30, 40]"
         :page-size="10"
         layout="total, sizes, prev, pager, next, jumper"
@@ -78,31 +80,35 @@
     </div>
     <el-dialog title="添加客户" :visible.sync="dialogAddUser" width="500px">
       <el-form :model="form" :rules="rules">
-        <el-form-item label="客户名称" :label-width="formLabelWidth" prop="userName">
-          <el-input v-model="form.userName" autocomplete="off" clearable></el-input>
+        <el-form-item label="客户名称" :label-width="formLabelWidth" prop="name">
+          <el-input v-model="form.name" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item label="公司名称" :label-width="formLabelWidth" prop="company">
           <el-input v-model="form.company" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="联系电话" :label-width="formLabelWidth" prop="phoneNumber">
-          <el-input v-model="form.phoneNumber" autocomplete="off" clearable></el-input>
+        <el-form-item label="联系电话" :label-width="formLabelWidth" prop="phone">
+          <el-input v-model="form.phone" autocomplete="off" clearable></el-input>
         </el-form-item>
-        <el-form-item label="性别" :label-width="formLabelWidth" prop="sex">
-          <el-input v-model="form.sex" autocomplete="off" clearable></el-input>
+        <el-form-item label="性别" :label-width="formLabelWidth">
+          <el-select v-model="form.sex" placeholder="男生">
+          <!-- <el-input v-model="form.sex" autocomplete="off" clearable></el-input> -->
+           <el-option label="男" value=0></el-option>
+            <el-option label="女" value=1></el-option>
+            </el-select>
         </el-form-item>
         <el-form-item label="客户类型" :label-width="formLabelWidth">
-          <el-select v-model="form.clientType" placeholder="未分类">
-            <el-option label="潜在客户" value="0"></el-option>
-            <el-option label="意向客户" value="1"></el-option>
-            <el-option label="试用客户" value="2"></el-option>
-            <el-option label="成交客户" value="3"></el-option>
+          <el-select v-model="form.rankString" placeholder="未分类">
+            <el-option label="潜在客户" value="潜在客户"></el-option>
+            <el-option label="意向客户" value="意向客户"></el-option>
+            <el-option label="试用客户" value="试用客户"></el-option>
+            <el-option label="成交客户" value="成交客户"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="导入批次" :label-width="formLabelWidth" prop="order">
-          <el-input v-model="form.order" autocomplete="off" clearable></el-input>
+        <el-form-item label="导入批次" :label-width="formLabelWidth" prop="batch">
+          <el-input v-model="form.batch" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
-          <el-input v-model="form.des" autocomplete="off" clearable></el-input>
+          <el-input v-model="form.remark" autocomplete="off" clearable></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -146,7 +152,7 @@
         </el-form-item>
         <el-form-item label="是否加入呼叫">
           <el-checkbox
-            label=""
+            label
             name="type"
             accept="excel"
             v-model="upload.isCall"
@@ -173,6 +179,7 @@
 </template>
 
 <script>
+import service from "@/utils/service";
 import { Message, Loading } from "element-ui";
 const cityOptions = [
   "已接通",
@@ -214,19 +221,18 @@ export default {
     return {
       dialogAddUser: false,
       form: {
-        userName: "",
+        name: "",
         company: "",
         sex: "",
-        phoneNumber: "",
-        clientType: "",
-        turn: "",
-        des: "",
-        status: ""
+        phone: "",
+        batch: "",
+        rankString: "",
+        remark: ""
       },
       formLabelWidth: "100px",
       rules: {
-        userName: [{ required: true, message: "请输入姓名", trigger: "blur" }],
-        phphoneNumberone: [
+        name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+        phone: [
           { required: true, message: "请输入电话", trigger: "blur" },
           { validator: checkPhone, trigger: "blur" }
         ]
@@ -249,76 +255,128 @@ export default {
       },
       showUpload: false,
 
-      tableData: [
-        {
-          id: 1,
-          sex: "男",
-          grade: "意向客户",
-          userName: "王小虎",
-          startTime: "2016-05-03",
-          des: "",
-          phoneNumber: "13621886041",
-          status: "未接通"
-        },
-        {
-          id: 2,
-          sex: "女",
-          grade: "意向客户",
-          userName: "王小虎",
-          startTime: "2016-05-04",
-          des: "",
-          phoneNumber: "13621886041",
-          status: "已呼叫"
-        }
-      ],
+      tableData: [],
       multipleSelection: [],
-      currentPage4: 4,
+      currentPage: 1,
 
       checkAll: false,
       checkAll2: false,
-      checkedCities: [],
-      checkedResults: [],
+      rank: [],
+      state: [],
       isIndeterminate: false,
       isIndeterminate2: false,
       cities: cityOptions,
       results: resultOptions
     };
   },
+  mounted() {
+    this.getListConsumer();
+  },
 
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-    handleCheckAllChange(val) {
-      this.checkedCities = val ? cityOptions : [];
-      this.isIndeterminate = false;
-    },
-    handleCheckedCitiesChange(value) {
-      let checkedCount = value.length;
-      this.checkAll = checkedCount === this.cities.length;
-      this.isIndeterminate =
-        checkedCount > 0 && checkedCount < this.cities.length;
-    },
-    handleCheckAllChange2(val) {
-      this.checkedResults = val ? resultOptions : [];
-      this.isIndeterminate2 = false;
-    },
-    handleCheckedCitiesChange2(value) {
-      let checkedCount = value.length;
-      this.checkAll = checkedCount === this.results.length;
-      this.isIndeterminate2 =
-        checkedCount > 0 && checkedCount < this.results.length;
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
+    //获取客户信息
+    getListConsumer() {
+      let params = {
+        rank: this.rank,
+        state: this.state,
+        page: this.currentPage,
+        size: 10
+      };
+      service.getListConsumer(params).then(res => {
+        if (!!res) {
+          const data = res.data;
+          if (!!data.status) {
+            const list = data.data;
+            // for(let i=0;i<list.length;i++){
+            //   switch (list[i].rankString){
+            //     case "0":
+            //     rankStringtext="潜在客户";
+            //     break;
+            //   }
+            // }
+            const total = data.data.total;
+            this.tableData = list;
+
+            this.totalContat = total;
+          } else {
+            Message({
+              message: data.description ? data.description : "获取列表失败！",
+              type: "error",
+              duration: 5 * 1000
+            });
+          }
+        }
+      });
     },
     //添加用户
     onSubmit() {
       this.dialogAddUser = false;
       let params = this.form;
+      if(params.sex==""){
+        params.sex=0
+      }
+      service.addConsumer(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"添加成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.getListConsumer();
+            }else{
+              Message({
+                message: data.description?data.description:"添加失败",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+           });
+      
+    },
+    //删除客户
+    deleteCall(){
+      let list=this.multipleSelection,consumerList=[]
+      if(list.length==0){
+        Message({
+                message: "请筛选数据",
+                type: 'error',
+                duration: 5 * 1000
+              })
+        return;
+      }
+      for(let i=0;i<list.length;i++){
+        consumerList.push(list[i].id)
+      }
+      let params={
+        "consumerList":consumerList
+      }
+       service.deleteConsumer(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"删除成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.getListConsumer();
+            }else{
+              Message({
+                message: data.description?data.description:"删除失败",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+           });
+
     },
     //加入呼叫提交
     callSubmit() {
@@ -358,7 +416,42 @@ export default {
       } else {
         this.showUpload = true;
       }
-    }
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    handleCheckAllChange(val) {
+      this.state = val ? cityOptions : [];
+      this.isIndeterminate = false;
+      this.getListConsumer()
+    },
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.cities.length;
+        this.state = value ? value : [];
+        this.getListConsumer()
+    },
+    handleCheckAllChange2(val) {
+      this.rank = val ? resultOptions : [];
+      this.isIndeterminate2 = false;
+      this.getListConsumer()
+    },
+    handleCheckedCitiesChange2(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.results.length;
+      this.isIndeterminate2 =
+        checkedCount > 0 && checkedCount < this.results.length;
+        this.rank = value ? value : [];
+        this.getListConsumer()
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
   }
 };
 </script>
@@ -392,6 +485,11 @@ export default {
 }
 .margin_form {
   margin-top: 30px;
+}
+.el-table .cell{
+  overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 }
 </style>
 

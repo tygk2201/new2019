@@ -141,4 +141,3 @@ export default {
   margin-right: 50px;
 }
 </style>
-
