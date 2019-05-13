@@ -31,7 +31,7 @@
         <!-- <el-button type="primary" size="small">导出</el-button> -->
         <el-button type="primary" size="small" @click="addCall(tableData)">加入呼叫</el-button>
         <!-- <el-button type="primary" size="small">转到CRM</el-button> -->
-        <el-button size="small" @click="deleteCall(tableData)">删除</el-button>
+        <el-button type="primary" size="small" @click="deleteCall(tableData)">删除</el-button>
       </el-row>
     </div>
     <div class="table_box">
@@ -64,7 +64,7 @@
         </el-table-column>
         <el-table-column label="操作">
           <template>
-            <el-button size="small" @click="dialogCall=true">加入呼叫</el-button>
+            <el-button type="primary" size="small" @click="dialogCall=true">加入呼叫</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -139,9 +139,9 @@
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
         multiple
-        :limit="3"
+        :limit="1"
         :on-exceed="handleExceed"
-        :file-list="fileList"
+        :on-success="getFileList"
       >
         <el-button size="small" type="primary">选择文件</el-button>
         <!-- <div slot="tip" class="el-upload__tip">只能上传excel文件</div> -->
@@ -395,20 +395,52 @@ export default {
       this.dialogCall = true;
     },
     //文件上传
-    handleChange(file, fileList) {
-      this.fileList = fileList.slice(-3);
-    },
+    // handleChange(file, fileList) {
+    //   this.fileList = fileList.slice(-3);
+    // },
     handleExceed(files, fileList) {
       Message({
-        message: `当前限制选择 3 个文件`,
+        message: `当前限制选择 1 个文件`,
         type: "error",
         duration: 5 * 1000
       });
       // this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件`);
     },
+    getFileList(response, file, fileList){
+      this.fileList=file
+    },
     //导入确定按钮
     uploadSubmit() {
-      this.dialogUpload = true;
+      this.dialogUpload = false;
+      let file = new FormData();
+      file.append("file", this.fileList);
+      let params={
+          "batch":this.upload.times,
+          "file":file,
+          "isCall":this.upload.isCall
+        }
+      console.log(params)
+      service.uploadConsumer(params).then(res=>{
+        if(!!res){
+            const data = res.data
+            if(!!data.status){
+              Message({
+                message: data.description?data.description:"导入成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.getListConsumer();
+            }else{
+              Message({
+                message: data.description?data.description:"导入失败",
+                type: 'error',
+                duration: 5 * 1000
+              })
+
+            }
+            
+          }
+           });
     },
     changeUpload(type) {
       if (!type) {
